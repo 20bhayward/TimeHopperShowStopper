@@ -28,7 +28,7 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Execute the behavior tree, it does 1 of the leaf nodes on update
+        // Execute the behavior tree, runs down the list of leaf nodes until it finds a "valid" behavior
         rootNode.Execute();
     }
 
