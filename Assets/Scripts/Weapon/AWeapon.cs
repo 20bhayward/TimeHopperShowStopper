@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public abstract class AWeapon : ScriptableObject, IWeapon
+public abstract class AWeapon : MonoBehaviour, IWeapon
 {
     [SerializeField] protected uint maxAmmo;
     [SerializeField] protected uint currAmmo;
