@@ -1,4 +1,4 @@
-public enum BTNodeState
+public enum NodeState
 {
     RUNNING,
     FAILURE,
