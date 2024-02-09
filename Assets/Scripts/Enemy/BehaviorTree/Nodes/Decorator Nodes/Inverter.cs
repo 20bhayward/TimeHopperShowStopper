@@ -1,5 +1,7 @@
 public class Inverter : ADecoratorNode
 {
+    public Inverter() : base() { }
+
     public override NodeState EvaluateFromChildNode(ANode childNode)
     {
         switch (childNode.Evaluate())

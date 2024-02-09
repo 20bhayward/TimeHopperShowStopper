@@ -1,5 +1,7 @@
 public class SelectRandomUntilSuccess : ATrueRandomCompositeNode
 {
+    public SelectRandomUntilSuccess() : base() { }
+
     public override void ProcessNode()
     {
         ANode randomChild = GetRandomChild();

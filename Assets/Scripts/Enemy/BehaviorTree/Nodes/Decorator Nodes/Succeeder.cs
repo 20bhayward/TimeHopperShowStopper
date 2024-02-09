@@ -1,5 +1,7 @@
 public class Succeeder : ADecoratorNode
 {
+    public Succeeder() : base() { }
+
     public override NodeState EvaluateFromChildNode(ANode childNode)
     {
         switch (childNode.Evaluate())
