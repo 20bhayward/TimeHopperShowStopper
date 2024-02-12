@@ -1,17 +1,15 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
 public abstract class AWeapon : MonoBehaviour, IWeapon
 {
-    [SerializeField] protected uint maxAmmo;
-    [SerializeField] protected uint currAmmo;
-
     [SerializeField] protected float fireRate;
 
     protected bool firing;
 
-    protected Transform barrelTransform;
+    protected List<Transform> barrelTransforms;
 
     private float _lastFireTime;
 
@@ -33,51 +31,20 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
         if (Time.fixedTime >= _lastFireTime + fireRate)
         {
             _lastFireTime = Time.fixedTime;
-            if (maxAmmo != 0)
-            {
-                currAmmo--;
-            }
             FireOnce();
         }
-
-        if (currAmmo == 0 && maxAmmo > 0)
-        {
-            StopAttack();
-        }
     }
 
-    public void SetBarrelTransform(Transform barrelTransform)
+    public void SetBarrelTransform(List<Transform> barrelTransforms)
     {
-        this.barrelTransform = barrelTransform;
+        this.barrelTransforms = barrelTransforms;
     }
 
-    public bool IsAmmoFull()
-    {
-        return currAmmo == maxAmmo;
-    }
-
-    public void AddAmmo(uint ammo)
-    {
-        if (currAmmo + ammo > maxAmmo)
-        {
-            currAmmo = maxAmmo;
-            return;
-        }
-        currAmmo += ammo;
-    }
-
-    public uint GetAmmo()
-    {
-        return currAmmo;
-    }
 
     public void StartAttack()
     {
-        if (maxAmmo == 0 || currAmmo > 0)
-        {
-            OnStartFiring();
-            firing = true;
-        }
+        OnStartFiring();
+        firing = true;
     }
 
     public void StopAttack()

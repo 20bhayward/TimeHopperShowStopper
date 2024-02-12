@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public interface IWeapon
@@ -10,11 +11,5 @@ public interface IWeapon
 
     public void StopAttack();
 
-    public bool IsAmmoFull();
-
-    public void AddAmmo(uint ammo);
-
-    public uint GetAmmo();
-
-    public void SetBarrelTransform(Transform barrelTransform);
+    public void SetBarrelTransform(List<Transform> barrelTransform);
 }

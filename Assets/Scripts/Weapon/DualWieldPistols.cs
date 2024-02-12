@@ -39,29 +39,14 @@ public class DualWieldPistols : AWeapon
 
     public override void FireOnce()
     {
-        Debug.Log("Attempting to fire. Current ammo: " + currAmmo);
-        if (currAmmo > 0)
-        {
-            StartCoroutine(FireWithDelay());
-        }
-        else
-        {
-            Debug.Log("Out of ammo.");
-        }
+        StartCoroutine(FireWithDelay());
     }
 
     private IEnumerator FireWithDelay()
     {
         PerformHitscan(leftBarrel);
-        currAmmo--;
         yield return new WaitForSeconds(fireDelay); // Wait for the specified delay
-
-        if (currAmmo > 0)
-        {
-            PerformHitscan(rightBarrel);
-            currAmmo--;
-            if (currAmmo < 0) currAmmo = 0; // Ensure ammo doesn't go negative
-        }
+        PerformHitscan(rightBarrel);
     }
 
     private void PerformHitscan(Transform barrel)
