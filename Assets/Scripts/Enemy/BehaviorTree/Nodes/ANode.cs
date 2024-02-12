@@ -5,7 +5,7 @@ public abstract class ANode
     private NodeState _state;
     protected ANode parent;
     protected List<ANode> children;
-    protected EnemyController enemyController;
+    protected AEnemyController enemyController;
     protected EnemyInfoManager enemyInfo;
     protected PlayerInfoManager playerInfo;
     protected WorldInfoManager worldInfo;
@@ -68,7 +68,7 @@ public abstract class ANode
         this.parent = parent;
     }
 
-    public void SetControllerAndInfo(EnemyController enemyController, EnemyInfoManager enemyInfo, PlayerInfoManager playerInfo, WorldInfoManager worldInfo)
+    public void SetControllerAndInfo(AEnemyController enemyController, EnemyInfoManager enemyInfo, PlayerInfoManager playerInfo, WorldInfoManager worldInfo)
     {
         this.enemyController = enemyController;
         this.enemyInfo = enemyInfo;

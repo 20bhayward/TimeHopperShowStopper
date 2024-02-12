@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyInfoManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int GetHealth()
     {
-        
+        return 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    public Vector3 GetPos()
     {
-        
+        return transform.position;
+    }
+
+    public float GetDistanceTo(Vector3 pos)
+    {
+        return Vector3.Distance(GetPos(), pos);
     }
 }

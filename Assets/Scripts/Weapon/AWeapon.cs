@@ -9,7 +9,9 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
 
     protected bool firing;
 
-    protected List<Transform> barrelTransforms;
+    [SerializeField] protected List<Transform> barrelTransforms;
+
+    
 
     private float _lastFireTime;
 

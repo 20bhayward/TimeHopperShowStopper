@@ -20,6 +20,15 @@ public class PlayerWeaponManager : MonoBehaviour
     private void Update()
     {
         _currWeapon.UpdateWeapon();
+        // Check for fire button press (e.g., left mouse button)
+        if (Input.GetButtonDown("Fire1")) // "Fire1" is typically the left mouse button or Ctrl in Unity's Input Manager
+        {
+            StartAttack();
+        }
+        else if (Input.GetButtonUp("Fire1")) // Ensures firing stops when the button is released
+        {
+            StopAttack();
+        }
     }
 
     public void SwitchToSlot(uint slot)
