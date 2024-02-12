@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Inventory _inventory;
 
-    public IInventory GetInventory()
+    public Inventory GetInventory()
     {
         return _inventory;
     }

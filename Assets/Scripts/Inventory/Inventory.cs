@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 
 [CreateAssetMenu(menuName = "Player/Inventory")]
-public class Inventory : MonoBehaviour, IInventory
+public class Inventory : MonoBehaviour
 {
     [SerializeField] private AWeapon[] _inventory;
     [SerializeField] private uint _currSlot;

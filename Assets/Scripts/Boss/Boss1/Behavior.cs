@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageUtil : MonoBehaviour
+public class NewBehaviorScript : MonoBehaviour
 {
     private Node rootNode;
     void Start()

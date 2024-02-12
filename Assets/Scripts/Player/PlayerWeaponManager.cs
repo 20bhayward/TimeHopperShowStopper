@@ -7,7 +7,7 @@ public class PlayerWeaponManager : MonoBehaviour
     [SerializeField] private PlayerInfoManager _playerInfoManager;
     [SerializeField] private List<Transform> _barrelTransform;
 
-    private IInventory _inventory;
+    private Inventory _inventory;
 
     private IWeapon _currWeapon;
 
