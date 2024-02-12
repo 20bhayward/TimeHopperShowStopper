@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerSlideNew : MonoBehaviour
+public class PlayerSlide : MonoBehaviour
 {
     public Transform orientation;
     public float slideForce = 10f;

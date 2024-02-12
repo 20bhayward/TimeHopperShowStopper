@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerWeaponManager : MonoBehaviour
 {
-    [SerializeField] private PlayerController _playerInfoManager;
-    [SerializeField] private Transform _barrelTransform;
+    [SerializeField] private PlayerInfoManager _playerInfoManager;
+    [SerializeField] private List<Transform> _barrelTransform;
 
     private IInventory _inventory;
 
