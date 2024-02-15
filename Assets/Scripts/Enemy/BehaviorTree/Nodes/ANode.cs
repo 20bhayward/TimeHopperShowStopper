@@ -5,7 +5,7 @@ public abstract class ANode
     private NodeState _state;
     protected ANode parent;
     protected List<ANode> children;
-    protected AEnemyController enemyController;
+    protected EnemyController enemyController;
     protected EnemyInfoManager enemyInfo;
     protected PlayerInfoManager playerInfo;
     protected WorldInfoManager worldInfo;
@@ -52,10 +52,12 @@ public abstract class ANode
         {
             if (_state == NodeState.FAILURE)
             {
+                enemyController.StopAllCoroutines();
                 OnFailure();
             }
             else
             {
+                enemyController.StopAllCoroutines();
                 OnSuccess();
             }
 
@@ -68,17 +70,20 @@ public abstract class ANode
         this.parent = parent;
     }
 
-    public void SetControllerAndInfo(AEnemyController enemyController, EnemyInfoManager enemyInfo, PlayerInfoManager playerInfo, WorldInfoManager worldInfo)
+    public void SetControllerAndInfo(EnemyController enemyController, EnemyInfoManager enemyInfo, PlayerInfoManager playerInfo, WorldInfoManager worldInfo)
     {
         this.enemyController = enemyController;
         this.enemyInfo = enemyInfo;
         this.playerInfo = playerInfo;
         this.worldInfo = worldInfo;
+        foreach (ANode node in children)
+        {
+            node.SetControllerAndInfo(enemyController, enemyInfo, playerInfo, worldInfo);
+        }
     }
 
     private void Attach(ANode node)
     {
-        node.SetControllerAndInfo(enemyController, enemyInfo, playerInfo, worldInfo);
         node.SetParent(this);
         children.Add(node);
     }
