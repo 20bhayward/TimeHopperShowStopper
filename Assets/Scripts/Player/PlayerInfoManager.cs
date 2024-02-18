@@ -8,4 +8,9 @@ public class PlayerInfoManager : MonoBehaviour
     {
         return _inventory;
     }
+
+    public Vector3 GetPos()
+    {
+        return transform.position;
+    }
 }

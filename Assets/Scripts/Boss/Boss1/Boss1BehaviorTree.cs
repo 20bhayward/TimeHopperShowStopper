@@ -25,7 +25,7 @@ public class Boss1BehaviorTree : ABehaviorTree
 
         //Build entire list within the below call using the list constructor
         ANode BossRoot = new SelectRandomIndefinite();
-        BossRoot.SetControllerAndInfo(BossController, BossInfoManager, playerInfo, worldInfo);
+        //BossRoot.SetControllerAndInfo(BossController, BossInfoManager, playerInfo, worldInfo);
         return BossRoot;
     }
 }
