@@ -10,7 +10,7 @@ public class Boss1BehaviorTree : ABehaviorTree
     protected override ANode SetupTree()
     {
 
-        AEnemyController BossController = new Boss1Controller();
+        EnemyController BossController = new Boss1Controller();
         EnemyInfoManager BossInfoManager = new EnemyInfoManager();
 
         //DONT USE DEFAULT CONSTRUCTORS FOR THINGS OTHER THAN STATE NODES
