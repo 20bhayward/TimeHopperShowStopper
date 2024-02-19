@@ -1,7 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class ASequence : AOrderedCompositeNode
 {
+
+    public ASequence(List<ANode> children) : base(children) { }
     protected void Operate(List<ANode> childNodes)
     {
         bool anyChildIsRunning = false;

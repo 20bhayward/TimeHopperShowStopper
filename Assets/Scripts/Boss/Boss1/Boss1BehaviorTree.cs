@@ -30,12 +30,16 @@ public class Boss1BehaviorTree : ABehaviorTree
 
 
         //Aggro Patterns (Inserted into the BossRootList)
-        ASequence AggroPattern1 = new StandardSequence(new List<ANode> {BoneMissilesRange});
-        ASequence AggroPattern2 = new StandardSequence(new List<ANode> {NegativeWaveRange});
-        ASequence AggroPattern3 = new StandardSequence(new List<ANode> {ChainSlashRange});
+        ASequence AggroPattern1 = new StandardSequence(new List<ANode> {BoneMissilesRange, BoneMissilesRange});
+        ASequence AggroPattern2 = new StandardSequence(new List<ANode> {NegativeWaveRange, NegativeWave});
+        ASequence AggroPattern3 = new StandardSequence(new List<ANode> {ChainSlashRange, ChainSlash});
+        //For later, replace State with random Selector within
 
         ANode Aggro = new SelectRandomIndefinite(new List<ANode> { AggroPattern1, AggroPattern2, AggroPattern3 });
         ANode Move = new SelectRandomIndefinite(new List<ANode> {new MoveToPlayer(), new MoveBackwards()});
+
+
+
 
 
 
