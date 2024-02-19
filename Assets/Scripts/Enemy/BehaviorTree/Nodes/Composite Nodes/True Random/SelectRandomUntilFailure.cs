@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 public class SelectRandomUntilFailure : ATrueRandomCompositeNode
 {
-    public SelectRandomUntilFailure() : base() { }
+    public SelectRandomUntilFailure(List<ANode> children) : base(children) { }
 
     public override void ProcessNode()
     {

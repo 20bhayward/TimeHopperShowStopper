@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 public class StandardSelector : ASelector
 {
-    public StandardSelector() : base() { }
+    public StandardSelector(List<ANode> children) : base(children) { }
 
     public override void ProcessNode()
     {

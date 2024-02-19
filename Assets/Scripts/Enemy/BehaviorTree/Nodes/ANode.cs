@@ -12,17 +12,19 @@ public abstract class ANode
 
     public ANode()
     {
-        InitNode();
         parent = null;
+        children = new List<ANode> { };
+        InitNode();
     }
 
     public ANode(List<ANode> children)
     {
-        InitNode();
+        children = new List<ANode> { };
         foreach (ANode child in children)
         {
             Attach(child);
         }
+        InitNode();
     }
 
     public NodeState Evaluate()

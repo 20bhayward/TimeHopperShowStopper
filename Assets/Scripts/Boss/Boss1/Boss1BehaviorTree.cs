@@ -41,15 +41,6 @@ public class Boss1BehaviorTree : ABehaviorTree
 
 
 
-
-
-
-
-
-
-
-
-
         //Build entire list within the below call using the list constructor
         ANode BossRoot = new SelectRandomIndefinite(new List<ANode> {Aggro, Move});
         return BossRoot;
