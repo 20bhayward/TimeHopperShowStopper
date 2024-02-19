@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class EnemyInfoManager : MonoBehaviour
 {
+    [SerializeField] protected EnemyMoveAndVisionChecker moveAndVisionChecker;
+
     public int GetHealth()
     {
         return 0;
@@ -15,5 +17,20 @@ public class EnemyInfoManager : MonoBehaviour
     public float GetDistanceTo(Vector3 pos)
     {
         return Vector3.Distance(GetPos(), pos);
+    }
+
+    public bool PosReached(Vector3 otherPos)
+    {
+        return GetDistanceTo(otherPos) < 0.01f;
+    }
+
+    public bool CanSeePos(Vector3 pos)
+    {
+        return moveAndVisionChecker.CanSeePos(pos);
+    }
+
+    public bool CanMoveToPosDirect(Vector3 pos)
+    {
+        return moveAndVisionChecker.CanMoveToPosDirect(pos);
     }
 }

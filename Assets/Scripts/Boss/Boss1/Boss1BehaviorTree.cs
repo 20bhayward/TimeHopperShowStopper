@@ -10,10 +10,7 @@ public class Boss1BehaviorTree : ABehaviorTree
     protected override ANode SetupTree()
     {
 
-        //Branch setup
-        //ROOT ->CONDITION(Melee or ranged) ->(Choose attack) -> Perform attack
-
-        AEnemyController BossController = new Boss1Controller();
+        EnemyController BossController = new Boss1Controller();
         EnemyInfoManager BossInfoManager = new EnemyInfoManager();
 
         //DONT USE DEFAULT CONSTRUCTORS FOR THINGS OTHER THAN STATE NODES
@@ -28,7 +25,7 @@ public class Boss1BehaviorTree : ABehaviorTree
 
         //Build entire list within the below call using the list constructor
         ANode BossRoot = new SelectRandomIndefinite();
-        BossRoot.SetControllerAndInfo(BossController, BossInfoManager, playerInfo, worldInfo);
+        //BossRoot.SetControllerAndInfo(BossController, BossInfoManager, playerInfo, worldInfo);
         return BossRoot;
     }
 }

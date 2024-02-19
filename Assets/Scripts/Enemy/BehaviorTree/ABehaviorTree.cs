@@ -3,14 +3,16 @@ using UnityEngine;
 public abstract class ABehaviorTree : MonoBehaviour
 {
     private ANode _root;
-    [SerializeField] public PlayerInfoManager playerInfo;
-    [SerializeField] public WorldInfoManager worldInfo;
-    [SerializeField] private AEnemyController enemyController;
-    [SerializeField] private EnemyInfoManager enenmyInfo;
+    [SerializeField] private EnemyController _enemyController;
+    [SerializeField] private EnemyInfoManager _enemyInfo;
+    [SerializeField] private PlayerInfoManager _playerInfo;
+    [SerializeField] private WorldInfoManager _worldInfo;
 
     public virtual void Start()
     {
         _root = SetupTree();
+        _enemyController.SetInfo(_enemyInfo, _playerInfo, _worldInfo);
+        _root.SetControllerAndInfo(_enemyController, _enemyInfo, _playerInfo, _worldInfo);
     }
 
     public virtual void Update()
