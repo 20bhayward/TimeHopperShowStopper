@@ -10,6 +10,9 @@ public class Boss1BehaviorTree : ABehaviorTree
     protected override ANode SetupTree()
     {
 
+        //Branch setup
+        //ROOT ->CONDITION(Melee or ranged) ->(Choose attack) -> Perform attack
+
         AEnemyController BossController = new Boss1Controller();
         EnemyInfoManager BossInfoManager = new EnemyInfoManager();
 
