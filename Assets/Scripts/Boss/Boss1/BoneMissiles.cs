@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoneMissles : AStateNode
+public class BoneMissiles : AStateNode
 {
 
     public override void UpdateState()

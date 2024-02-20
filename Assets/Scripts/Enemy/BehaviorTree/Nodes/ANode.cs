@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public abstract class ANode
 {
@@ -19,7 +20,7 @@ public abstract class ANode
 
     public ANode(List<ANode> children)
     {
-        children = new List<ANode> { };
+        this.children = new List<ANode> { };
         foreach (ANode child in children)
         {
             Attach(child);

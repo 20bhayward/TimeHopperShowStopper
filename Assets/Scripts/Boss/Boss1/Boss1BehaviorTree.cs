@@ -9,10 +9,6 @@ public class Boss1BehaviorTree : ABehaviorTree
 
     protected override ANode SetupTree()
     {
-
-        EnemyController BossController = new Boss1Controller();
-        EnemyInfoManager BossInfoManager = new EnemyInfoManager();
-
         //DONT USE DEFAULT CONSTRUCTORS FOR THINGS OTHER THAN STATE NODES
 
 
@@ -21,7 +17,7 @@ public class Boss1BehaviorTree : ABehaviorTree
         AConditionNode ChainSlashRange = new PlayerInRange(10);
 
 
-        AStateNode BoneMissles = new BoneMissles();
+        AStateNode BoneMissiles = new BoneMissiles();
         AStateNode NegativeWave = new NegativeWave();
         AStateNode ChainSlash = new ChainSlash();
 
@@ -30,7 +26,7 @@ public class Boss1BehaviorTree : ABehaviorTree
 
 
         //Aggro Patterns (Inserted into the BossRootList)
-        ASequence AggroPattern1 = new StandardSequence(new List<ANode> {BoneMissilesRange, BoneMissilesRange});
+        ASequence AggroPattern1 = new StandardSequence(new List<ANode> {BoneMissilesRange, BoneMissiles});
         ASequence AggroPattern2 = new StandardSequence(new List<ANode> {NegativeWaveRange, NegativeWave});
         ASequence AggroPattern3 = new StandardSequence(new List<ANode> {ChainSlashRange, ChainSlash});
         //For later, replace State with random Selector within
