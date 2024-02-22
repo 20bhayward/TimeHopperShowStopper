@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChainSlash : AStateNode
+public class ChainSlash : StateNode
 {
     public override void UpdateState()
     {

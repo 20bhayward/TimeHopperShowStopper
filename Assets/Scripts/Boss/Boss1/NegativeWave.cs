@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NegativeWave : AStateNode
+public class NegativeWave : StateNode
 {
     public override void UpdateState()
     {

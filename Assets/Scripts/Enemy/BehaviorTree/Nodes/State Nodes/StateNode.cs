@@ -1,4 +1,4 @@
-public abstract class AStateNode : ANode
+public class StateNode : ANode
 {
     private bool _active;
 
@@ -25,7 +25,7 @@ public abstract class AStateNode : ANode
         OnExitState();
     }
 
-    public abstract void UpdateState();
+    public virtual void UpdateState() { }
 
     public virtual void OnEnterState() { }
 

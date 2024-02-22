@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveBackwards : AStateNode
+public class MoveBackwards : StateNode
 {
     public override void UpdateState()
     {

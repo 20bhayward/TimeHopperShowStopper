@@ -1,4 +1,4 @@
-public class TemplateState : AStateNode
+public class TemplateState : StateNode
 {
     public TemplateState() : base() { }
 

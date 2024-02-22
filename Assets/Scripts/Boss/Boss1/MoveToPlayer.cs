@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveToPlayer : AStateNode
+public class MoveToPlayer : StateNode
 {
     public override void UpdateState()
     {
