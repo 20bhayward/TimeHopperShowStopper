@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField] protected Animator animator;
     [SerializeField] protected AEnemyMovement movement;
 
     protected EnemyInfoManager enemyInfo;
@@ -19,6 +20,7 @@ public class EnemyController : MonoBehaviour
         this.worldInfo = worldInfo;
     }
 
+    #region MOVEMENT METHODS
     public void MoveToPosDirect(Vector3 pos)
     {
         movement.MoveTowardPos(pos);
@@ -69,4 +71,22 @@ public class EnemyController : MonoBehaviour
         _navigating = false;
         movement.StopMovement();
     }
+    #endregion
+
+    #region ANIMATION METHODS
+    public void PlayAnimationState(string animationStateName)
+    {
+        animator.Play(animationStateName);
+    }
+
+    public void ExitCurrentAnimationState()
+    {
+        //
+    }
+
+    public float GetCurrentAnimationStateProgress()
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    }
+    #endregion
 }
