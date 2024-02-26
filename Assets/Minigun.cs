@@ -27,12 +27,15 @@ public class Minigun : MonoBehaviour, IWeapon
     private float currentHeat = 0f;
     private bool isUsingMaterial1 = true;
 
+    [Header("Animation Settings")]
+    public Animator barrelAnimator; // Assign this in the inspector
+
     void Start()
     {
         // Laser LineRenderer setup
         laserLineRenderer = gameObject.AddComponent<LineRenderer>();
-        laserLineRenderer.startWidth = 0.5f;
-        laserLineRenderer.endWidth = 0.5f;
+        laserLineRenderer.startWidth = 0.3f;
+        laserLineRenderer.endWidth = 0.3f;
         laserLineRenderer.material = laserMaterial1;
         laserLineRenderer.enabled = false;
 
@@ -46,6 +49,10 @@ public class Minigun : MonoBehaviour, IWeapon
         whirringAudioSource.playOnAwake = false;
         whirringAudioSource.loop = true;
         whirringAudioSource.clip = whirringSound;
+        if (barrelAnimator == null)
+        {
+            barrelAnimator = GetComponent<Animator>();
+        }
     }
 
     public void InitWeapon()
@@ -62,6 +69,10 @@ public class Minigun : MonoBehaviour, IWeapon
             if (!whirringAudioSource.isPlaying)
                 whirringAudioSource.Play();
 
+            // Start the barrel spin animation
+            barrelAnimator.SetBool("isFiring", true);
+            barrelAnimator.Play("BarrelSpin");
+
             fireTimer += Time.deltaTime;
             IncreaseHeat(Time.deltaTime);
             FireWeapon();
@@ -69,6 +80,10 @@ public class Minigun : MonoBehaviour, IWeapon
         else
         {
             StopAttack();
+
+            barrelAnimator.SetBool("isFiring", false);
+            barrelAnimator.Play("Idle");
+
             if (whirringAudioSource.isPlaying)
                 whirringAudioSource.Stop();
         }
