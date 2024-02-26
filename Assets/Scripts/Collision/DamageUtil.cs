@@ -10,7 +10,7 @@ public static class DamageUtil
 
     public static void DamageObject(GameObject obj, float damage)
     {
-        Damageable damageable = obj.GetComponent<Damageable>();
+        IDamageable damageable = obj.GetComponent<IDamageable>();
 
         if (damageable != null)
         {

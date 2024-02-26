@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class Moveable : MonoBehaviour
 {
+    [SerializeField] private Rigidbody _rb;
+
     public void ApplyForce(Vector2 force)
     {
-        GetComponent<Rigidbody2D>().AddForce(force);
+        _rb.AddForce(force);
     }
 }
