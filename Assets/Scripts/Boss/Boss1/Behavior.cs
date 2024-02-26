@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviorScript : MonoBehaviour
+public class Behavior: MonoBehaviour
 {
     private Node rootNode;
     void Start()

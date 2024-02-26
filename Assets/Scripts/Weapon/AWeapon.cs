@@ -9,7 +9,7 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
 
     protected bool firing;
 
-    [SerializeField] protected List<Transform> barrelTransforms;
+    [SerializeField] protected Transform[] barrelTransforms;
 
     
 
@@ -18,6 +18,7 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
     public void InitWeapon()
     {
         _lastFireTime = Time.fixedTime - fireRate;
+        SetBarrelTransform(barrelTransforms);
     }
 
     public void UpdateWeapon()
@@ -37,7 +38,7 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
         }
     }
 
-    public void SetBarrelTransform(List<Transform> barrelTransforms)
+    public void SetBarrelTransform(Transform[] barrelTransforms)
     {
         this.barrelTransforms = barrelTransforms;
     }
@@ -58,9 +59,19 @@ public abstract class AWeapon : MonoBehaviour, IWeapon
         }
     }
 
+    public Transform[] GetBarrels()
+    {
+        return barrelTransforms;
+    }
+
     public virtual void OnStartFiring() { }
 
     public virtual void OnStopFiring() { }
 
     public abstract void FireOnce();
+
+    public void SetActive(bool v)
+    {
+        gameObject.SetActive(v);
+    }
 }

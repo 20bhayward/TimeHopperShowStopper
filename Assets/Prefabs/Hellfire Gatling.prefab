@@ -1,0 +1,187 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &311910700646622228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2747283794711485437}
+  m_Layer: 0
+  m_Name: Barrel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2747283794711485437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311910700646622228}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.2781, y: 1.6817, z: 1.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5735654251464440475}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5399176363122811295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5735654251464440475}
+  - component: {fileID: 281443834562439255}
+  m_Layer: 0
+  m_Name: Hellfire Gatling
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5735654251464440475
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5399176363122811295}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.00000038743013, y: 0.000000012107192, z: -0.0000000031432132, w: 1}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8532187267639898846}
+  - {fileID: 2747283794711485437}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &281443834562439255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5399176363122811295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e22f8a78a648c419a563f3cfce73a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  barrelEnd: {fileID: 2747283794711485437}
+  maxSpreadAngle: 20
+  timeToFocus: 7
+  laserRange: 100
+  laserMaterial: {fileID: 2100000, guid: 03ec7251a30177b49b5128c34fbe1d67, type: 2}
+  overheatTime: 10
+  cooldownRate: 3
+--- !u!1001 &2094007713897525402
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5735654251464440475}
+    m_Modifications:
+    - target: {fileID: 1579579943165625504, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+      propertyPath: m_Name
+      value: Hellfire Gatling Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114383916080540788, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114383916080540788, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 230.9034
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739158842357006916, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.019999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739158842357006916, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3555
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739158842357006916, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4915
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739158842357006916, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.2314
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739158842357006916, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7331749
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739158842357006916, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.0024643303
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739158842357006916, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.68001604
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739158842357006916, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0051630777
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739158842357006916, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0.195
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739158842357006916, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 85.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739158842357006916, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -0.626
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5800528333015617122, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4658903647200919257}
+  m_SourcePrefab: {fileID: 100100000, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+--- !u!1 &5580229467260206840 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5800528333015617122, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+  m_PrefabInstance: {fileID: 2094007713897525402}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &4658903647200919257
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5580229467260206840}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: bc46b8cbfc470ca4aafa372089fc5eb1, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: bc46b8cbfc470ca4aafa372089fc5eb1, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!4 &8532187267639898846 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7739158842357006916, guid: 8c835d408c9af55499a041194dfbe150, type: 3}
+  m_PrefabInstance: {fileID: 2094007713897525402}
+  m_PrefabAsset: {fileID: 0}

@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class PlayerInfoManager : MonoBehaviour
 {
-    [SerializeField] private Inventory _inventory;
+    [SerializeField] private WeaponManager _inventory;
 
-    public Inventory GetInventory()
+    public WeaponManager GetInventory()
     {
         return _inventory;
     }

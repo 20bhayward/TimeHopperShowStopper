@@ -11,5 +11,8 @@ public interface IWeapon
 
     public void StopAttack();
 
-    public void SetBarrelTransform(List<Transform> barrelTransform);
+    public void SetBarrelTransform(Transform[] barrelTransform);
+
+    public Transform[] GetBarrels();
+    void SetActive(bool v);
 }
