@@ -20,7 +20,7 @@ public static class DamageUtil
 
     public static void KnockbackObject(GameObject obj, float knockback, Vector3 knockbackDir)
     {
-        Moveable moveable = obj.GetComponent<Moveable>();
+        IMoveable moveable = obj.GetComponent<IMoveable>();
 
         if (moveable != null)
         {
