@@ -34,8 +34,8 @@ public class Minigun : MonoBehaviour, IWeapon
     {
         // Laser LineRenderer setup
         laserLineRenderer = gameObject.AddComponent<LineRenderer>();
-        laserLineRenderer.startWidth = 0.3f;
-        laserLineRenderer.endWidth = 0.3f;
+        laserLineRenderer.startWidth = 0.5f;
+        laserLineRenderer.endWidth = 0.5f;
         laserLineRenderer.material = laserMaterial1;
         laserLineRenderer.enabled = false;
 
