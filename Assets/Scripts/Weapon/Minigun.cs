@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Minigun : MonoBehaviour, IWeapon
 {
+
     [Header("Laser Settings")]
     public LayerMask hitLayers;
     public Transform barrelEnd;
@@ -12,20 +13,22 @@ public class Minigun : MonoBehaviour, IWeapon
     public float laserRange = 100f;
 
     [Header("Overheat Settings")]
-    public float maxHeat = 100f; // The maximum heat before overheating
-    public float heatPerSecond = 20f; // How much heat is generated per second of firing
-    public float cooldownRate = 10f; // How fast the gun cools down per second when not firing
+    public float maxHeat = 100f;
+    public float heatPerSecond = 20f;
+    public float cooldownRate = 10f;
     public Renderer minigunRenderer;
-    public int overheatMaterialIndex = 0; // Index of the material to change on overheat
+    public int overheatMaterialIndex = 0;
     public Color coolColor = Color.blue;
     public Color overheatedColor = Color.red;
 
     [Header("Sound Settings")]
     public AudioClip firingSound;
     public AudioClip whirringSound;
+    public AudioClip overheatSound; // Overheat sound clip
 
     private AudioSource audioSource;
     private AudioSource whirringAudioSource;
+    private bool hasPlayedOverheatSound = false; // Flag to control overheat sound playback
     private float fireTimer = 0f;
     private LineRenderer laserLineRenderer;
     private bool isOverheated = false;
@@ -57,7 +60,7 @@ public class Minigun : MonoBehaviour, IWeapon
             barrelAnimator = GetComponent<Animator>();
         }
 
-        UpdateMaterial(0); // Set initial material state to cool
+        UpdateEmission(0f); // Initialize emission to zero
     }
 
     void Update()
@@ -71,20 +74,30 @@ public class Minigun : MonoBehaviour, IWeapon
             StopAttack();
         }
 
-        // Cooling down logic
         if (!Input.GetButton("Fire1") && currentHeat > 0)
         {
             DecreaseHeat(cooldownRate * Time.deltaTime);
         }
 
-        // Update the color based on current heat
-        UpdateMaterial(currentHeat / maxHeat);
+        UpdateEmission(currentHeat / maxHeat);
+        UpdateBarrelSpinSpeed(); // Update barrel spin speed based on current heat
     }
 
     void IncreaseHeat(float amount)
     {
         currentHeat += amount;
         currentHeat = Mathf.Min(currentHeat, maxHeat);
+
+        if (currentHeat >= maxHeat && !hasPlayedOverheatSound)
+        {
+            audioSource.PlayOneShot(overheatSound);
+            hasPlayedOverheatSound = true;
+        }
+        else if (currentHeat < maxHeat)
+        {
+            hasPlayedOverheatSound = false;
+        }
+
         isOverheated = currentHeat >= maxHeat;
     }
 
@@ -98,12 +111,10 @@ public class Minigun : MonoBehaviour, IWeapon
     void UpdateMaterial(float heatFraction)
     {
         Color newColor = Color.Lerp(coolColor, overheatedColor, heatFraction);
-        Debug.Log($"Updating color to: {newColor}");
         Material[] materials = minigunRenderer.materials;
         materials[overheatMaterialIndex].color = newColor;
         minigunRenderer.materials = materials;
     }
-
 
     public void StartAttack()
     {
@@ -168,6 +179,30 @@ public class Minigun : MonoBehaviour, IWeapon
             laserLineRenderer.SetPositions(new Vector3[] { barrelEnd.position, barrelEnd.position + direction * laserRange });
         }
     }
+
+    void UpdateEmission(float heatFraction)
+    {
+        // Dynamically adjust the emission based on the current heat
+        Material material = minigunRenderer.materials[overheatMaterialIndex];
+        Color baseColor = Color.Lerp(coolColor, overheatedColor, heatFraction); // Linearly interpolate between cool and overheated colors based on heatFraction
+        float emissionIntensity = 1 - heatFraction; // Adjust emission intensity to decrease as the weapon heats up
+
+        // Set the emission color, adjusting for gamma space as Unity's renderer expects gamma space values for emission
+        material.SetColor("_EmissionColor", baseColor * Mathf.LinearToGammaSpace(emissionIntensity));
+        minigunRenderer.materials[overheatMaterialIndex] = material; // Update the material
+    }
+
+
+    void UpdateBarrelSpinSpeed()
+    {
+        float normalizedHeat = currentHeat / maxHeat;
+        float minSpeed = 0.1f; // Minimum spin speed when the gun is cool.
+        float maxSpeed = 2.0f; // Maximum spin speed when the gun is overheated.
+        float spinSpeed = Mathf.Lerp(minSpeed, maxSpeed, normalizedHeat);
+        barrelAnimator.speed = spinSpeed;
+    }
+
+
 
     // Implementation of IWeapon interface methods
     public void InitWeapon() { }
