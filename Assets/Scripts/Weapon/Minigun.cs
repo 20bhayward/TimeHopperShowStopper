@@ -12,8 +12,13 @@ public class Minigun : MonoBehaviour, IWeapon
     public float laserRange = 100f;
 
     [Header("Overheat Settings")]
-    public float overheatTime = 5f;
-    public float cooldownRate = 1f;
+    public float maxHeat = 100f; // The maximum heat before overheating
+    public float heatPerSecond = 20f; // How much heat is generated per second of firing
+    public float cooldownRate = 10f; // How fast the gun cools down per second when not firing
+    public Renderer minigunRenderer;
+    public int overheatMaterialIndex = 0; // Index of the material to change on overheat
+    public Color coolColor = Color.blue;
+    public Color overheatedColor = Color.red;
 
     [Header("Sound Settings")]
     public AudioClip firingSound;
@@ -28,98 +33,90 @@ public class Minigun : MonoBehaviour, IWeapon
     private bool isUsingMaterial1 = true;
 
     [Header("Animation Settings")]
-    public Animator barrelAnimator; // Assign this in the inspector
+    public Animator barrelAnimator;
 
     void Start()
     {
-        // Laser LineRenderer setup
         laserLineRenderer = gameObject.AddComponent<LineRenderer>();
         laserLineRenderer.startWidth = 0.5f;
         laserLineRenderer.endWidth = 0.5f;
         laserLineRenderer.material = laserMaterial1;
         laserLineRenderer.enabled = false;
 
-        // AudioSource setup for firing sound
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
         audioSource.clip = firingSound;
 
-        // Separate AudioSource for continuous whirring sound
         whirringAudioSource = gameObject.AddComponent<AudioSource>();
         whirringAudioSource.playOnAwake = false;
         whirringAudioSource.loop = true;
         whirringAudioSource.clip = whirringSound;
+
         if (barrelAnimator == null)
         {
             barrelAnimator = GetComponent<Animator>();
         }
-    }
 
-    public void InitWeapon()
-    {
-
+        UpdateMaterial(0); // Set initial material state to cool
     }
 
     void Update()
     {
-        HandleCooling();
-
         if (Input.GetButton("Fire1") && !isOverheated)
         {
-            if (!whirringAudioSource.isPlaying)
-                whirringAudioSource.Play();
-
-            // Start the barrel spin animation
-            barrelAnimator.SetBool("isFiring", true);
-            barrelAnimator.Play("BarrelSpin");
-
-            fireTimer += Time.deltaTime;
-            IncreaseHeat(Time.deltaTime);
-            FireWeapon();
+            StartAttack();
         }
         else
         {
             StopAttack();
-
-            barrelAnimator.SetBool("isFiring", false);
-            barrelAnimator.Play("Idle");
-
-            if (whirringAudioSource.isPlaying)
-                whirringAudioSource.Stop();
         }
+
+        // Cooling down logic
+        if (!Input.GetButton("Fire1") && currentHeat > 0)
+        {
+            DecreaseHeat(cooldownRate * Time.deltaTime);
+        }
+
+        // Update the color based on current heat
+        UpdateMaterial(currentHeat / maxHeat);
     }
 
     void IncreaseHeat(float amount)
     {
         currentHeat += amount;
-        if (currentHeat >= overheatTime)
-        {
-            isOverheated = true;
-            laserLineRenderer.enabled = false; // Optionally disable laser on overheat
-            // Add overheat feedback (e.g., visual, audio) here
-        }
+        currentHeat = Mathf.Min(currentHeat, maxHeat);
+        isOverheated = currentHeat >= maxHeat;
     }
 
-    void HandleCooling()
+    void DecreaseHeat(float amount)
     {
-        if (!Input.GetButton("Fire1") && currentHeat > 0)
-        {
-            currentHeat -= cooldownRate * Time.deltaTime;
-            if (currentHeat <= 0)
-            {
-                currentHeat = 0;
-                isOverheated = false;
-                // Add cooldown feedback (e.g., visual, audio) here
-            }
-        }
+        currentHeat -= amount;
+        currentHeat = Mathf.Max(currentHeat, 0);
+        isOverheated = currentHeat >= maxHeat;
     }
+
+    void UpdateMaterial(float heatFraction)
+    {
+        Color newColor = Color.Lerp(coolColor, overheatedColor, heatFraction);
+        Debug.Log($"Updating color to: {newColor}");
+        Material[] materials = minigunRenderer.materials;
+        materials[overheatMaterialIndex].color = newColor;
+        minigunRenderer.materials = materials;
+    }
+
 
     public void StartAttack()
     {
         if (isOverheated) return;
 
-        fireTimer = 0f;
-        laserLineRenderer.enabled = true;
+        barrelAnimator.SetBool("isFiring", true);
+
+        fireTimer += Time.deltaTime;
+        IncreaseHeat(heatPerSecond * Time.deltaTime);
+        FireWeapon();
+
+        if (!whirringAudioSource.isPlaying)
+            whirringAudioSource.Play();
     }
 
     void FireWeapon()
@@ -127,27 +124,36 @@ public class Minigun : MonoBehaviour, IWeapon
         laserLineRenderer.enabled = true;
 
         if (!audioSource.isPlaying)
-            audioSource.Play(); // Play firing sound
+            audioSource.Play();
 
-        // Alternate laser material with each shot
         laserLineRenderer.material = isUsingMaterial1 ? laserMaterial1 : laserMaterial2;
         isUsingMaterial1 = !isUsingMaterial1;
 
+        Vector3 direction;
         if (fireTimer < timeToFocus)
         {
-            // Calculate the dynamic spread based on fire timer
             float currentSpread = Mathf.Lerp(maxSpreadAngle, 0f, fireTimer / timeToFocus);
-
-            // Generate a random direction within the spread cone
-            Vector3 spreadDirection = Quaternion.Euler(Random.Range(-currentSpread, currentSpread), Random.Range(-currentSpread, currentSpread), 0) * barrelEnd.forward;
-
-            FireBullet(spreadDirection);
+            direction = Quaternion.Euler(Random.Range(-currentSpread, currentSpread), Random.Range(-currentSpread, currentSpread), 0) * barrelEnd.forward;
         }
         else
         {
-            // Once fully focused, fire a straight laser shot
-            FireBullet(barrelEnd.forward);
+            direction = barrelEnd.forward;
         }
+
+        FireBullet(direction);
+    }
+
+    public void StopAttack()
+    {
+        if (laserLineRenderer.enabled)
+            audioSource.Stop();
+
+        laserLineRenderer.enabled = false;
+        fireTimer = 0f;
+        barrelAnimator.SetBool("isFiring", false);
+
+        if (whirringAudioSource.isPlaying)
+            whirringAudioSource.Stop();
     }
 
     void FireBullet(Vector3 direction)
@@ -155,29 +161,18 @@ public class Minigun : MonoBehaviour, IWeapon
         RaycastHit hit;
         if (Physics.Raycast(barrelEnd.position, direction, out hit, laserRange, hitLayers))
         {
-            // Position the laser to hit the target
             laserLineRenderer.SetPositions(new Vector3[] { barrelEnd.position, hit.point });
         }
         else
         {
-            // Extend the laser to its maximum range if it doesn't hit anything
             laserLineRenderer.SetPositions(new Vector3[] { barrelEnd.position, barrelEnd.position + direction * laserRange });
         }
     }
 
-    public void StopAttack()
-    {
-        if (laserLineRenderer.enabled)
-            audioSource.Stop(); // Stop firing sound when not firing
-
-        laserLineRenderer.enabled = false;
-        fireTimer = 0f;
-    }
-
-    // IWeapon interface stubs
+    // Implementation of IWeapon interface methods
+    public void InitWeapon() { }
     public void UpdateWeapon() { }
     public void SetBarrelTransform(Transform[] barrelTransform) { }
     public Transform[] GetBarrels() { return new Transform[] { barrelEnd }; }
     public void SetActive(bool isActive) { gameObject.SetActive(isActive); }
-    
 }
