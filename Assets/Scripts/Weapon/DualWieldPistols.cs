@@ -5,11 +5,12 @@ public class DualWieldPistols : AWeapon
 {
     public LayerMask hitLayers; // Define which layers the bullets can hit, including enemies
     public float range = 100f; // Max range of the hitscan
-    public GameObject hitEffectPrefab; // Prefab for the visual effect at the hit location
+    public float damageAmount = 1f;
     public float fireDelay = 0.1f; // Delay in seconds between firing each pistol
     public AudioClip gunshotSound; // Assign in the inspector
     public Material laserMaterial; // Assign in the inspector
     public float laserDuration = 0.1f; // How long the laser is visible
+    public GameObject hitEffectPrefab; // Prefab for the visual effect at the hit location
 
     private AudioSource audioSource;
 
@@ -106,15 +107,12 @@ public class DualWieldPistols : AWeapon
             }
 
             StartCoroutine(DrawLaser(barrel.position, hit.point));
-            Debug.Log("Hit: " + hit.collider.name);
             if (hitEffectPrefab)
             {
                 Instantiate(hitEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
             }
-        }
-        else
-        {
-            Debug.Log("No hit detected.");
+            Debug.Log("Hit: " + hit.collider.name);
+            DamageUtil.DamageObject(hit.collider.gameObject, damageAmount); // Assume damageAmount is defined elsewhere
         }
     }
 

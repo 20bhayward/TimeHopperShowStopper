@@ -3,55 +3,71 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+    // Movement parameters
     public float moveSpeed = 12f;
-    public float jumpForce = 8f;
-    public LayerMask groundMask;
-    private float groundDistance = 0.1f; // Radius for ground check sphere
-    public float airMultiplier = 0.4f; // How movement in air differs from ground movement
+    public float jumpForce = 10f;
+    public int maxJumps = 1; // Total number of jumps allowed
+    public LayerMask groundMask; // LayerMask to determine what constitutes ground
+    public float airMultiplier = 0.4f; // Movement multiplier for air control
+
+    // Internal state
     private Rigidbody rb;
     private bool isGrounded;
+    private int jumpsLeft;
     private Vector3 moveDirection;
-    private float groundCheckOffset = -1.5f; // Offset from the player's center to check for ground
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true; // Prevent Rigidbody from rotating
+        jumpsLeft = maxJumps;
     }
 
     void Update()
     {
-        // Calculate the position for ground check directly below the player's feet
-        Vector3 groundCheckPosition = transform.position + Vector3.up * groundCheckOffset;
-        isGrounded = Physics.CheckSphere(groundCheckPosition, groundDistance, groundMask);
+        // Jumping logic
+        if (Input.GetButtonDown("Jump") && jumpsLeft > 0)
+        {
+            jumpsLeft--;
+            Jump();
+        }
 
+        // Get input for movement
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
         moveDirection = (transform.right * x + transform.forward * z).normalized;
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            Jump();
-        }
-
-        if (isGrounded)
-        {
-            Move(moveDirection, moveSpeed);
-        }
-        else
-        {
-            Move(moveDirection, moveSpeed * airMultiplier);
-        }
+        // Handle movement
+        Move(moveDirection * (isGrounded ? moveSpeed : moveSpeed * airMultiplier));
     }
 
-    void Move(Vector3 direction, float speed)
+    void Move(Vector3 velocity)
     {
-        Vector3 movement = direction * speed * Time.deltaTime; // Calculate movement vector
-        rb.MovePosition(rb.position + movement); // Move the player
+        Vector3 move = velocity * Time.deltaTime;
+        rb.MovePosition(rb.position + move);
     }
 
     void Jump()
     {
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Apply jump force
+        // Reset vertical velocity for a consistent jump
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGrounded = true;
+            jumpsLeft = maxJumps; // Reset jumps when you touch the ground
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGrounded = false;
+        }
     }
 }
