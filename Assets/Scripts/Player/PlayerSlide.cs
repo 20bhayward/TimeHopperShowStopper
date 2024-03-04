@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerSlide : MonoBehaviour
@@ -10,13 +11,23 @@ public class PlayerSlide : MonoBehaviour
     private Rigidbody rb;
     private bool isSliding = false;
     private float slideTimer;
-    private Vector3 originalScale; // Store the original scale
-    private float slideHeightMultiplier = 0.5f;
+    private CapsuleCollider collider;
+    private Vector3 originalCenter; // Original center of the collider
+    private float originalHeight; // Original height of the collider
+    public Transform cameraTransform; // Reference to the camera transform
+    private float originalCameraHeight; // Original local position y of the camera
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        originalScale = transform.localScale; // Save the original scale
+        collider = GetComponent<CapsuleCollider>();
+        originalHeight = collider.height;
+        originalCenter = collider.center;
+        if (cameraTransform != null)
+        {
+            originalCameraHeight = cameraTransform.localPosition.y;
+        }
     }
 
     void Update()
@@ -48,8 +59,13 @@ public class PlayerSlide : MonoBehaviour
     {
         isSliding = true;
         // Adjust the scale and position to simulate crouching without sinking into the ground
-        transform.localScale = new Vector3(originalScale.x, originalScale.y * slideHeightMultiplier, originalScale.z);
-        transform.position -= new Vector3(0, (originalScale.y - transform.localScale.y) / 2, 0);
+        collider.height = originalHeight / 2; // Halve the collider's height
+        collider.center = new Vector3(originalCenter.x, originalCenter.y / 2, originalCenter.z); // Adjust the center
+        if (cameraTransform != null)
+        {
+            // Lower the camera to simulate sliding perspective
+            cameraTransform.localPosition = new Vector3(cameraTransform.localPosition.x, originalCameraHeight / 2, cameraTransform.localPosition.z);
+        }
         slideTimer = maxSlideTime;
     }
 
@@ -62,8 +78,17 @@ public class PlayerSlide : MonoBehaviour
     private void StopSlide()
     {
         isSliding = false;
-        // Reset the scale and position
-        transform.localScale = originalScale;
-        transform.position += new Vector3(0, (originalScale.y - transform.localScale.y) / 2, 0);
+        collider.height = originalHeight; // Restore the original height
+        collider.center = originalCenter; // Restore the original center
+        if (cameraTransform != null)
+        {
+            // Restore the camera's original position
+            cameraTransform.localPosition = new Vector3(cameraTransform.localPosition.x, originalCameraHeight, cameraTransform.localPosition.z);
+        }
+    }
+
+    public bool getIsSliding()
+    {
+        return isSliding;
     }
 }

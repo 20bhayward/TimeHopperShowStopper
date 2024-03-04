@@ -1,13 +1,16 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Minigun : MonoBehaviour, IWeapon
 {
 
-    [Header("Laser Settings")]
+    [Header("Gun Settings")]
     public LayerMask hitLayers;
     public Transform barrelEnd;
     public Material laserMaterial1;
     public Material laserMaterial2;
+    public float damageAmount = 1.0f;
     public float maxSpreadAngle = 10f;
     public float timeToFocus = 3f;
     public float laserRange = 100f;
@@ -173,12 +176,15 @@ public class Minigun : MonoBehaviour, IWeapon
         if (Physics.Raycast(barrelEnd.position, direction, out hit, laserRange, hitLayers))
         {
             laserLineRenderer.SetPositions(new Vector3[] { barrelEnd.position, hit.point });
+            Debug.Log("Hit: " + hit.collider.name);
+            DamageUtil.DamageObject(hit.collider.gameObject, damageAmount); 
         }
         else
         {
             laserLineRenderer.SetPositions(new Vector3[] { barrelEnd.position, barrelEnd.position + direction * laserRange });
         }
     }
+
 
     void UpdateEmission(float heatFraction)
     {
