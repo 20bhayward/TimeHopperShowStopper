@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 public class StateNode : ANode
 {
     private bool _active;
@@ -11,7 +13,14 @@ public class StateNode : ANode
     {
         if (!_active)
         {
+            SetupState();
+            if (!CanRun())
+            {
+                SetState(NodeState.FAILURE);
+                return;
+            }
             _active = true;
+            enemyInfo.SetCurrentStateName(GetType().Name);
             OnEnterState();
         }
         SetState(NodeState.RUNNING);
@@ -19,11 +28,14 @@ public class StateNode : ANode
         ProcessExitConditions();
     }
 
-    public override void OnExitToParent()
+    public override void OnExitNode()
     {
+        enemyInfo.SetCurrentStateName("NONE");
         _active = false;
         OnExitState();
     }
+
+    public virtual void SetupState() { }
 
     public virtual void UpdateState() { }
 
@@ -41,6 +53,11 @@ public class StateNode : ANode
         {
             SetState(NodeState.SUCCESS);
         }
+    }
+
+    public virtual bool CanRun()
+    {
+        return true;
     }
 
     public virtual bool FailConditionMet()

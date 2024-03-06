@@ -4,6 +4,8 @@ public class EnemyInfoManager : MonoBehaviour
 {
     [SerializeField] protected EnemyMoveAndVisionChecker moveAndVisionChecker;
 
+    private string _currentStateName;
+
     public int GetHealth()
     {
         return 0;
@@ -32,5 +34,15 @@ public class EnemyInfoManager : MonoBehaviour
     public bool CanMoveToPosDirect(Vector3 pos)
     {
         return moveAndVisionChecker.CanMoveToPosDirect(pos);
+    }
+
+    public void SetCurrentStateName(string name)
+    {
+        _currentStateName = name;
+    }
+
+    public string GetCurrentStateName()
+    {
+        return _currentStateName;
     }
 }

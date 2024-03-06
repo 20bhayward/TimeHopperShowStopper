@@ -6,12 +6,15 @@ public class TestBossAttackTree : ABehaviorTree
     {
         return new StandardSelector(new List<ANode>()
         {
+            new FiniteAnimationNode("AttackPattern1", new List<AConditionNode>()
+            {
+                new PlayerInRange(10)
+            }),
             new StandardSequence(new List<ANode>()
             {
-                new PlayerInRange(50),
-                new FiniteAnimationNode("AttackPattern1")
-            }),
-            new StateNode()
+                new PlayerOutOfRange(10),
+                new MoveToPlayer()
+            })
         });
     }
 }

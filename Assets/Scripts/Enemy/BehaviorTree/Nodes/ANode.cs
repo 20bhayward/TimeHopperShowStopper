@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Unity.VisualScripting;
 
 public abstract class ANode
 {
@@ -10,6 +12,8 @@ public abstract class ANode
     protected EnemyInfoManager enemyInfo;
     protected PlayerInfoManager playerInfo;
     protected WorldInfoManager worldInfo;
+
+    private Action _exitBehavior = null;
 
     public ANode()
     {
@@ -34,11 +38,16 @@ public abstract class ANode
         return _state;
     }
 
+    public NodeState GetState()
+    {
+        return _state;
+    }
+
     public abstract void ProcessNode();
 
     public virtual void InitNode() { }
 
-    public virtual void OnExitToParent() { }
+    public virtual void OnExitNode() { }
 
     public virtual void OnFailure() { }
 
@@ -50,22 +59,33 @@ public abstract class ANode
         {
             return;
         }
-        _state = state;
-        if (_state != NodeState.RUNNING)
+        NodeState nextState = state;
+        if (nextState != NodeState.RUNNING)
         {
-            if (_state == NodeState.FAILURE)
-            {
-                enemyController.StopAllCoroutines();
-                OnFailure();
-            }
-            else
-            {
-                enemyController.StopAllCoroutines();
-                OnSuccess();
-            }
-
-            ExitAllChildren();
+            ProcessStateTransition(nextState);
         }
+        else
+        {
+            _state = nextState;
+        }
+    }
+
+    private void ProcessStateTransition(NodeState nextState)
+    {
+        _state = nextState;
+        if (_state == NodeState.FAILURE)
+        {
+            enemyController.StopAllCoroutines();
+            OnExitNode();
+            OnFailure();
+        }
+        else
+        {
+            enemyController.StopAllCoroutines();
+            OnExitNode();
+            OnSuccess();
+        }
+        ExitAllChildren();
     }
 
     public void SetParent(ANode parent)
@@ -95,7 +115,11 @@ public abstract class ANode
     {
         foreach (ANode node in children)
         {
-            node.OnExitToParent();
+            /*if (node.GetType().Name == "FiniteAnimationNode")
+            {
+                UnityEngine.Debug.Log("^^Exiting FiniteAnimationNode child");
+            }*/
+            node.OnExitNode();
             node.SetState(_state);
         }
     }

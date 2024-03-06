@@ -3,8 +3,8 @@ using UnityEngine;
 
 public abstract class AOrderedCompositeNode : ANode
 {
-
     public AOrderedCompositeNode(List<ANode> children) : base(children) { }
+
     public List<ANode> RandomizeChildren()
     {
         List<int> indexes = new List<int>();

@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class MoveToPlayer : StateNode
 {
+    private bool _movementFailed = false;
+
     public override void UpdateState()
     {
         Debug.Log("Currently moving to player");
-        enemyController.TryMoveToPosDirect(playerInfo.GetPos());
+        _movementFailed = !enemyController.TryMoveToPosDirect(playerInfo.GetPos());
     }
 
     public override bool FailConditionMet()
     {
-        return false;
+        return _movementFailed;
     }
 
     public override bool SuccessConditionMet()
     {
-        return true;
+        return enemyInfo.PosReached(playerInfo.GetPos());
     }
 
     public override void OnEnterState()
@@ -27,6 +29,7 @@ public class MoveToPlayer : StateNode
 
     public override void OnExitState()
     {
+        enemyController.StopMovement();
         Debug.Log("Move to player finished");
     }
 

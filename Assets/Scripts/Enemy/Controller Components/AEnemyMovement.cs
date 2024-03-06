@@ -12,7 +12,15 @@ public abstract class AEnemyMovement : MonoBehaviour
 
     public void MoveTowardPos(Vector3 pos)
     {
+        RotateTowardPos(pos);
         Vector3 dir = (pos - transform.position).normalized;
         MoveInDir(dir);
+    }
+
+    public void RotateTowardPos(Vector3 pos)
+    {
+        Vector3 dir = (pos - transform.position).normalized;
+        Vector3 flattenedDir = new Vector3(dir.x, 0, dir.z);
+        rb.rotation = Quaternion.LookRotation(flattenedDir);
     }
 }

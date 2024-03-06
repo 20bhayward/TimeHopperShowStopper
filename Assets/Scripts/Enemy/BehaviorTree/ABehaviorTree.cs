@@ -7,6 +7,7 @@ public abstract class ABehaviorTree : MonoBehaviour
     [SerializeField] private EnemyInfoManager _enemyInfo;
     [SerializeField] private PlayerInfoManager _playerInfo;
     [SerializeField] private WorldInfoManager _worldInfo;
+    [SerializeField] private string _currentStateName;
 
     public virtual void Start()
     {
@@ -21,6 +22,7 @@ public abstract class ABehaviorTree : MonoBehaviour
         {
             _root.Evaluate();
         }
+        _currentStateName = _enemyInfo.GetCurrentStateName();
     }
 
     protected abstract ANode SetupTree();

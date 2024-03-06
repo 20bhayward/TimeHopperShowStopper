@@ -5,6 +5,7 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] protected Animator animator;
+    [SerializeField] private string _idleAnimStateName;
     [SerializeField] protected AEnemyMovement movement;
 
     protected EnemyInfoManager enemyInfo;
@@ -24,6 +25,11 @@ public class EnemyController : MonoBehaviour
     public void MoveToPosDirect(Vector3 pos)
     {
         movement.MoveTowardPos(pos);
+    }
+
+    public void StopMovement()
+    {
+        movement.StopMovement();
     }
 
     public bool TryMoveToPosDirect(Vector3 pos)
@@ -79,9 +85,10 @@ public class EnemyController : MonoBehaviour
         animator.Play(animationStateName);
     }
 
-    public void ExitCurrentAnimationState()
+    public void ReturnToIdleState()
     {
-        //
+        Debug.Log("% Returning to Idle");
+        animator.Play(_idleAnimStateName);
     }
 
     public float GetCurrentAnimationStateProgress()
