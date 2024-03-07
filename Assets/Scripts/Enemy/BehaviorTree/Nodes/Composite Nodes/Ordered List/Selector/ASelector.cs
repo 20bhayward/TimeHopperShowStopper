@@ -2,8 +2,8 @@ using System.Collections.Generic;
 
 public abstract class ASelector : AOrderedCompositeNode
 {
-
     public ASelector(List<ANode> children) : base(children) { }
+
     protected void Operate(List<ANode> childNodes)
     {
         foreach (ANode node in childNodes)

@@ -1,8 +1,12 @@
+using System.Collections.Generic;
+
 public abstract class ADelayedAnimationEventNode : FiniteAnimationNode
 {
     protected float eventDelay;
+    protected bool eventTriggered;
 
-    public ADelayedAnimationEventNode(string animationStateName, float eventDelay) : base(animationStateName)
+    public ADelayedAnimationEventNode(string animationStateName, float eventDelay,
+        List<AConditionNode> conditions = null) : base(animationStateName, conditions)
     {
         if (eventDelay < 0 || eventDelay > 1)
         {
@@ -11,10 +15,17 @@ public abstract class ADelayedAnimationEventNode : FiniteAnimationNode
         this.eventDelay = eventDelay;
     }
 
+    public override void OnEnterState()
+    {
+        base.OnEnterState();
+        eventTriggered = false;
+    }
+
     public override void UpdateState()
     {
-        if (enemyController.GetCurrentAnimationStateProgress() >= eventDelay)
+        if (enemyController.GetCurrentAnimationStateProgress() >= eventDelay && !eventTriggered)
         {
+            eventTriggered = true;
             PerformDelayedEvent();
         }
     }

@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] protected Animator animator;
     [SerializeField] private string _idleAnimStateName;
+    [SerializeField] protected Rigidbody rb;
     [SerializeField] protected AEnemyMovement movement;
 
     protected EnemyInfoManager enemyInfo;
@@ -20,6 +21,13 @@ public class EnemyController : MonoBehaviour
         this.playerInfo = playerInfo;
         this.worldInfo = worldInfo;
     }
+
+    #region RIGIDBODY METHODS
+    public Rigidbody GetRigidbody()
+    { 
+        return rb; 
+    }
+    #endregion
 
     #region MOVEMENT METHODS
     public void MoveToPosDirect(Vector3 pos)
