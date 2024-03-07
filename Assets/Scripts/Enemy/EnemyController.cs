@@ -30,6 +30,11 @@ public class EnemyController : MonoBehaviour
     #endregion
 
     #region MOVEMENT METHODS
+    public void RotateTowardPos(Vector3 pos)
+    {
+        movement.RotateTowardPos(pos);
+    }
+
     public void MoveToPosDirect(Vector3 pos)
     {
         movement.MoveTowardPos(pos);

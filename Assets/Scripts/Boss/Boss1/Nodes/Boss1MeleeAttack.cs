@@ -24,6 +24,7 @@ public class Boss1MeleeAttack : FiniteAnimationNode
         base.OnEnterState();
         Boss1Controller bossController = (Boss1Controller)enemyController;
         bossController.StartMeleeAttack(_damage);
+        enemyController.RotateTowardPos(playerInfo.GetPos());
         _movementStarted = false;
         _movementFinished = false;
     }
