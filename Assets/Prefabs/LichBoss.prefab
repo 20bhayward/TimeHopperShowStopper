@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2892d50eda2e8449b9ba71390106329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyController: {fileID: 0}
+  _enemyController: {fileID: 6296407783650060757}
   _enemyInfo: {fileID: 5706800481607097802}
   _playerInfo: {fileID: 0}
   _worldInfo: {fileID: 0}
@@ -609,7 +609,7 @@ Rigidbody:
   m_GameObject: {fileID: 1919443294786726202}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 15
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -1653,7 +1653,7 @@ MonoBehaviour:
   rb: {fileID: 6226706321134554767}
   _animator: {fileID: 6796552642840650331}
   _runBoolName: Running
-  _groundSpeed: 2
+  _groundSpeed: 30
 --- !u!1 &5962111119927110118
 GameObject:
   m_ObjectHideFlags: 0
@@ -2424,7 +2424,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 6796552642840650331}
   _idleAnimStateName: Idle
+  rb: {fileID: 6226706321134554767}
   movement: {fileID: 3323405270564955690}
+  _meleeWeapon: {fileID: 857724200569506497}
 --- !u!1 &9117391051225592340
 GameObject:
   m_ObjectHideFlags: 0

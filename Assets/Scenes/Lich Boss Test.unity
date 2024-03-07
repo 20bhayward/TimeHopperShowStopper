@@ -236,6 +236,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 189560677189423337, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1013862086878380231, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1520661560174168855, guid: 07b8679378572394298b921b33650422, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -291,6 +299,62 @@ PrefabInstance:
     - target: {fileID: 1533503766827935070, guid: 07b8679378572394298b921b33650422, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1533503766827935070, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919199215190258709, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2030523386018011842, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2856110048254669634, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719759192057582745, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441932118313355781, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483395349356975458, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630543710511556681, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6128163611970670553, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431675240643954817, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6950475666535100702, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7278697623041505758, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7597434454523483362, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949983495550042751, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -659,10 +723,6 @@ PrefabInstance:
       propertyPath: _playerInfo
       value: 
       objectReference: {fileID: 251962187}
-    - target: {fileID: 5575078706255277538, guid: 82b90090e9100ae48ba29c22966bbab6, type: 3}
-      propertyPath: attackForce
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 5575078706255277538, guid: 82b90090e9100ae48ba29c22966bbab6, type: 3}
       propertyPath: _enemyController
       value: 

@@ -2,13 +2,11 @@ using System.Collections.Generic;
 
 public class TestBossAttackTree : ABehaviorTree
 {
-    public float attackForce;
-
     protected override ANode SetupTree()
     {
         return new StandardSelector(new List<ANode>()
         {
-            new Boss1MeleeAttack("AttackPattern1", 0.6f, 0.7f, 70, attackForce, new List<AConditionNode>()
+            new Boss1MeleeAttack("AttackPattern1", 0.6f, 0.7f, 20, 100, new List<AConditionNode>()
             {
                 new PlayerInRange(10)
             }),
