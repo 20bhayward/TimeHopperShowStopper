@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
     public float health = 100f;
+    public float MaxHealth = 100f;
 
     public void TakeDamage(float amount)
     {

@@ -4,44 +4,48 @@ using UnityEngine;
 
 public class FireBoneSpur : MonoBehaviour
 {
-    [SerializeField] private int projectileCount;
     [SerializeField] private bool homing;
     public GameObject BoneSpur;
     public Transform spawnPoint;
-    public float speed = 4;
-    public int projectilesToFire = 5; // Number of projectiles to fire at once
-    private List<GameObject> projectiles = new List<GameObject>();
+    public float speed = 20;
+    public int projectilesToFire = 4; // Number of projectiles to fire at once
+    private GameObject playerGameObject;
+
     void Start()
     {
-        
+        playerGameObject = GameObject.FindGameObjectWithTag("Player");
     }
 
-
-    void SpawnProjectile(Vector3 playerPos)
+    void Update()
     {
-        Vector3 direction = (playerPos - spawnPoint.position).normalized;
-
-        GameObject projectile = Instantiate(BoneSpur, spawnPoint.transform.position, Quaternion.LookRotation(direction));
-
-        projectiles.Add(projectile);
-
-        if (projectiles.Count >= projectilesToFire)
+        // Check for "G" key press(This is just for testing, when actually implemented, comment/remove this function and just call SpawnAndShootProjectile from the node
+        if (Input.GetKeyDown(KeyCode.G))
         {
-            ShootAtPlayer(playerPos);
+            PlayerInfoManager playerInfoManager = playerGameObject.GetComponent<PlayerInfoManager>();
+            SpawnAndShootProjectiles(playerInfoManager.GetPos());
         }
     }
 
-    void ShootAtPlayer(Vector3 playerPos)
+    void SpawnAndShootProjectiles(Vector3 playerPos)
     {
-        Vector3 direction = (playerPos - spawnPoint.position).normalized;
-        Destroy(BoneSpur, 5f);
+        Debug.Log("Spawning and shooting projectiles");
 
-        foreach (var projectile in projectiles)
+        for (int i = 0; i < projectilesToFire; i++)
+        {
+            Vector3 direction = (playerPos - spawnPoint.position).normalized;
+            Quaternion rotation = Quaternion.LookRotation(direction);
+
+            GameObject projectile = Instantiate(BoneSpur, spawnPoint.position, rotation);
+            StartCoroutine(FireProjectile(projectile, direction));
+        }
+    }
+
+    IEnumerator FireProjectile(GameObject projectile, Vector3 direction)
+    {
+        while (true)
         {
             projectile.transform.position += direction * speed * Time.deltaTime;
+            yield return null;
         }
-
-
-        projectiles.Clear();
     }
 }
