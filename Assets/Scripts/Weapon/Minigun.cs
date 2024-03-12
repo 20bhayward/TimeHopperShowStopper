@@ -1,8 +1,9 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Minigun : MonoBehaviour, IWeapon
+public class Minigun : MonoBehaviour, IWeapon, IWeaponAbility
 {
 
     [Header("Gun Settings")]
@@ -40,6 +41,19 @@ public class Minigun : MonoBehaviour, IWeapon
 
     [Header("Animation Settings")]
     public Animator barrelAnimator;
+    public Animator gunAnimator;
+
+    [Header("Ability Settings")]
+    public float baseDamage = 10f;
+    public float maxDamage = 30f;
+    public float baseRange = 2f;
+    public float maxRange = 5f;
+    public Collider regularAttackCollider;
+    public Collider chargedAttackCollider;
+    public AudioClip chargedWeaponSound;
+    public AudioClip attackSound;
+    public AudioClip chargedAttackSound;
+    public GameObject chargedAttackVFX;
 
     void Start()
     {
@@ -176,7 +190,7 @@ public class Minigun : MonoBehaviour, IWeapon
         if (Physics.Raycast(barrelEnd.position, direction, out hit, laserRange, hitLayers))
         {
             laserLineRenderer.SetPositions(new Vector3[] { barrelEnd.position, hit.point });
-            Debug.Log("Hit: " + hit.collider.name);
+            //Debug.Log("Hit: " + hit.collider.name);
             DamageUtil.DamageObject(hit.collider.gameObject, damageAmount); 
         }
         else
@@ -206,6 +220,46 @@ public class Minigun : MonoBehaviour, IWeapon
         float maxSpeed = 2.0f; // Maximum spin speed when the gun is overheated.
         float spinSpeed = Mathf.Lerp(minSpeed, maxSpeed, normalizedHeat);
         barrelAnimator.speed = spinSpeed;
+    }
+
+    public void ActivateAbility()
+    {
+        bool isChargedAttack = currentHeat >= maxHeat;
+        float damage = Mathf.Lerp(baseDamage, maxDamage, currentHeat / maxHeat);
+        Collider activeCollider = isChargedAttack ? chargedAttackCollider : regularAttackCollider;
+
+        // Play appropriate sound
+        AudioClip soundToPlay = isChargedAttack ? chargedAttackSound : attackSound;
+        audioSource.PlayOneShot(soundToPlay);
+
+        // Show VFX for charged attack
+        if (isChargedAttack && chargedAttackVFX != null)
+        {
+            chargedAttackVFX.SetActive(true);
+            // You might want to deactivate the VFX after some time
+            Invoke(nameof(HideChargedAttackVFX), 2f); // Adjust time as needed
+        }
+
+        StartCoroutine(ActivateCollider(activeCollider, damage, isChargedAttack));
+    }
+
+    IEnumerator ActivateCollider(Collider collider, float damage, bool isChargedAttack)
+    {
+        collider.enabled = true;
+
+        // Wait for the next frame to ensure the collider only hits once
+        yield return null;
+
+        // You can add logic here to apply damage using DamageUtils
+        // Ensure DamageUtils and the method you're using support specifying the damage amount and collider
+
+        collider.enabled = false;
+    }
+
+    void HideChargedAttackVFX()
+    {
+        if (chargedAttackVFX != null)
+            chargedAttackVFX.SetActive(false);
     }
 
 

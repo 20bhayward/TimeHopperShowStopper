@@ -5,6 +5,7 @@ public class WeaponManager : MonoBehaviour
     [SerializeField]
     private GameObject[] weaponObjects; // Assign weapon GameObjects in the inspector
     private IWeapon[] weapons; // Interface references to the weapons
+    private IWeaponAbility currentWeaponAbility;
     private int currentWeaponIndex = 0;
 
     void Start()
@@ -26,6 +27,15 @@ public class WeaponManager : MonoBehaviour
     {
         HandleWeaponSwitching();
         HandleWeaponFiring();
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            currentWeaponAbility?.ActivateAbility();
+        }
+    }
+
+    public void SwitchWeapon(IWeaponAbility newWeaponAbility)
+    {
+        currentWeaponAbility = newWeaponAbility;
     }
 
     private void HandleWeaponSwitching()
