@@ -13,7 +13,7 @@ public class EnemyGroundMovement :AEnemyMovement
         _animator.SetBool(_runBoolName, true);
         // TODO: Improve this code later
         Vector3 flattenedDir = new Vector3(dir.x, 0, dir.z);
-        rb.AddForce(flattenedDir.normalized * _groundSpeed);
+        rb.velocity = flattenedDir.normalized * _groundSpeed;
     }
 
     public override void StopMovement()
