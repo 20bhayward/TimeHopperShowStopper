@@ -59,11 +59,6 @@ public class DualWieldPistols : AWeapon
         RaycastHit hit;
         if (Physics.Raycast(shootingPoint.position, shootingPoint.forward, out hit, range, hitLayers))
         {
-            if (gunshotSound && audioSource)
-            {
-                audioSource.PlayOneShot(gunshotSound);
-            }
-
             if (hitEffectPrefab)
             {
                 Instantiate(hitEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
@@ -74,6 +69,10 @@ public class DualWieldPistols : AWeapon
     }
     private void ShowMuzzleFlash(Transform muzzleFlashPoint)
     {
+        if (gunshotSound && audioSource)
+        {
+            audioSource.PlayOneShot(gunshotSound);
+        }
         if (muzzleFlashPrefab)
         {
             // Instantiate the muzzle flash as a child of the muzzleFlashPoint

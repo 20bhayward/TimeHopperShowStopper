@@ -1,24 +1,27 @@
 using UnityEngine;
+using UnityEngine.UI; // Required for UI elements manipulation
 
 public class WeaponManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] weaponObjects; // Assign weapon GameObjects in the inspector
     private IWeapon[] weapons; // Interface references to the weapons
-    private IWeaponAbility currentWeaponAbility;
     private int currentWeaponIndex = 0;
+
+    [SerializeField]
+    private GameObject[] crosshairObjects; // Array of crosshair Image objects
 
     void Start()
     {
-        // Initialize the weapons array and deactivate all weapons except the first
         weapons = new IWeapon[weaponObjects.Length];
         for (int i = 0; i < weaponObjects.Length; i++)
         {
             weapons[i] = weaponObjects[i].GetComponent<IWeapon>();
-            weaponObjects[i].SetActive(i == 0); // Activate the first weapon
+            weaponObjects[i].SetActive(i == 0);
             if (i == 0)
             {
-                weapons[i].InitWeapon(); // Initialize the first (active) weapon
+                weapons[i].InitWeapon();
+                UpdateCrosshair(i); // Set the initial crosshair
             }
         }
     }
@@ -27,22 +30,13 @@ public class WeaponManager : MonoBehaviour
     {
         HandleWeaponSwitching();
         HandleWeaponFiring();
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            currentWeaponAbility?.ActivateAbility();
-        }
-    }
-
-    public void SwitchWeapon(IWeaponAbility newWeaponAbility)
-    {
-        currentWeaponAbility = newWeaponAbility;
     }
 
     private void HandleWeaponSwitching()
     {
         int previousWeaponIndex = currentWeaponIndex;
 
-        // Input for changing weapons using scroll wheel
+        // Handle input for changing weapons
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
             currentWeaponIndex = currentWeaponIndex >= weapons.Length - 1 ? 0 : currentWeaponIndex + 1;
@@ -52,7 +46,7 @@ public class WeaponManager : MonoBehaviour
             currentWeaponIndex = currentWeaponIndex <= 0 ? weapons.Length - 1 : currentWeaponIndex - 1;
         }
 
-        // Number key input for direct weapon selection
+        // Handle number key input for direct weapon selection
         for (int i = 0; i < weapons.Length; i++)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1 + i))
@@ -65,6 +59,7 @@ public class WeaponManager : MonoBehaviour
         if (previousWeaponIndex != currentWeaponIndex)
         {
             SwitchWeapon(previousWeaponIndex, currentWeaponIndex);
+            UpdateCrosshair(currentWeaponIndex);
         }
     }
 
@@ -88,6 +83,17 @@ public class WeaponManager : MonoBehaviour
     {
         weaponObjects[from].SetActive(false);
         weaponObjects[to].SetActive(true);
-        weapons[to].InitWeapon(); // Ensure the newly activated weapon is initialized
+        weapons[to].InitWeapon();
+    }
+
+    private void UpdateCrosshair(int weaponIndex)
+    {
+        for (int i = 0; i < crosshairObjects.Length; i++)
+        {
+            if (crosshairObjects[i])
+            {
+                crosshairObjects[i].SetActive(i == weaponIndex);
+            }
+        }
     }
 }
