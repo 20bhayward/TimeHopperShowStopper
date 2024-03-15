@@ -8,7 +8,7 @@ public class CompoundDamageable : MonoBehaviour
     [SerializeField] private EnemyHealth _health;
     [SerializeField] private float _damageWindow = 0.01f;
     private float _lastDamageTime;
-    public Image mainHealthBarFill; 
+
 
     private void Start()
     {
