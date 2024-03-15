@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public class TestBossAttackTree : ABehaviorTree
+public class TestBoss1Tree : ABehaviorTree
 {
     protected override ANode SetupTree()
     {
@@ -12,6 +12,9 @@ public class TestBossAttackTree : ABehaviorTree
             }),
             new StandardSequence(new List<ANode>()
             {
+                //new BoneSpurs("Bone Spikes", 0.43f, new List<AConditionNode>{
+                //    new PlayerOutOfRange(10)
+                //})
                 new PlayerOutOfRange(10),
                 new MoveToPlayer()
             })

@@ -3382,6 +3382,10 @@ PrefabInstance:
       propertyPath: m_TranslationOffsets.Array.data[0].y
       value: -0.036601067
       objectReference: {fileID: 0}
+    - target: {fileID: 8050152624297300200, guid: aab207071961de44bb799aeecde59038, type: 3}
+      propertyPath: _boneSpurs
+      value: 
+      objectReference: {fileID: 1806191700}
     - target: {fileID: 8356428171331183208, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.21738815
@@ -3481,8 +3485,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 788064633676672164, guid: aab207071961de44bb799aeecde59038, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1806191700}
   m_SourcePrefab: {fileID: 100100000, guid: aab207071961de44bb799aeecde59038, type: 3}
+--- !u!4 &1806191698 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3470940447766416675, guid: aab207071961de44bb799aeecde59038, type: 3}
+  m_PrefabInstance: {fileID: 1806191697}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1806191699 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 788064633676672164, guid: aab207071961de44bb799aeecde59038, type: 3}
+  m_PrefabInstance: {fileID: 1806191697}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1806191700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806191699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e23c6a60580b06141acd9ff2973c2b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  homing: 0
+  BoneSpur: {fileID: 6172740967761826166, guid: af748641641deb943b76dd3ad43127b6, type: 3}
+  spawnPoint: {fileID: 1806191698}
+  speed: 20
+  projectilesToFire: 4
 --- !u!1 &2112617391
 GameObject:
   m_ObjectHideFlags: 0

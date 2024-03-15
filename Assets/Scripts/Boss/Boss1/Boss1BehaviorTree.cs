@@ -17,7 +17,7 @@ public class Boss1BehaviorTree : ABehaviorTree
         AConditionNode ChainSlashRange = new PlayerInRange(10);
 
 
-        StateNode BoneMissiles = new BoneSpurs();
+        StateNode BoneMissiles = new BoneSpurs("Bone Spikes", 0.43f);
         StateNode NegativeWave = new NegativeWave();
         StateNode ChainSlash = new ChainSlash();
 

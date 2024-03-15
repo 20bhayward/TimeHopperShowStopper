@@ -44,9 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e23c6a60580b06141acd9ff2973c2b00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileCount: 5
   homing: 0
-  BoneSpur: {fileID: 2498053961891126723, guid: 6cc6bffc598e2954091ca83ff60f01ce, type: 3}
+  BoneSpur: {fileID: 6172740967761826166, guid: af748641641deb943b76dd3ad43127b6, type: 3}
   spawnPoint: {fileID: 7117652153138015213}
   speed: 4
   projectilesToFire: 5

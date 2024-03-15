@@ -20,7 +20,7 @@ public class Boss1Controller : EnemyController
     #endregion
 
     #region SPECIAL ABILITIES
-    public void FireBoneSpurst(Vector3 playerPos)
+    public void FireBoneSpurs(Vector3 playerPos)
     {
         _boneSpurs.SpawnAndShootProjectiles(playerPos);
     }

@@ -8,6 +8,11 @@ public class BoneSpurs : ADelayedAnimationEventNode
     {
     }
 
+    public override void OnEnterState()
+    {
+        enemyController.RotateTowardPos(playerInfo.GetPos());
+    }
+
     public override void PerformDelayedEvent()
     {
         Boss1Controller bossController = (Boss1Controller)enemyController;

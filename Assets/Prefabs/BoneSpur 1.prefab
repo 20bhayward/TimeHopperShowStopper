@@ -121,7 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deletionLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 265
+  damageAmount: 10
 --- !u!54 &3789973987723055597
 Rigidbody:
   m_ObjectHideFlags: 0
