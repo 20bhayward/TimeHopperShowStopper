@@ -26,7 +26,7 @@ public class FireBoneSpur : MonoBehaviour
         }
     }
 
-    void SpawnAndShootProjectiles(Vector3 playerPos)
+    public void SpawnAndShootProjectiles(Vector3 playerPos)
     {
         Debug.Log("Spawning and shooting projectiles");
 
