@@ -70,7 +70,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: -0.20600003, y: 0.564, z: 0.027999982}
   m_RotationAtRest: {x: 0, y: -176.71155, z: -6.687854}
   m_TranslationOffsets:
-  - {x: -0.34160417, y: -0.18511534, z: -0.11785126}
+  - {x: -0.34160423, y: -0.18511534, z: -0.11785126}
   m_RotationOffsets:
   - {x: 0, y: -180, z: 0}
   m_AffectTranslationX: 1
@@ -167,7 +167,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0.22299999, y: -0.975, z: 0.06999999}
   m_RotationAtRest: {x: 81.187485, y: -180, z: -180}
   m_TranslationOffsets:
-  - {x: 0.056287408, y: -0.22840902, z: 0.28899425}
+  - {x: 0.056287408, y: -0.22840917, z: 0.2889948}
   m_RotationOffsets:
   - {x: 78.6747, y: -179.99997, z: -179.99997}
   m_AffectTranslationX: 1
@@ -264,9 +264,9 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0.762, y: 0.544, z: 0.05399999}
   m_RotationAtRest: {x: 0, y: 0, z: -94.68715}
   m_TranslationOffsets:
-  - {x: -0.9220464, y: -0.0608716, z: -0.033339858}
+  - {x: -0.9220468, y: -0.0608716, z: -0.033340454}
   m_RotationOffsets:
-  - {x: -0.03719957, y: -179.41304, z: -91.06091}
+  - {x: -0.0371996, y: -179.41304, z: -91.060905}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -301,6 +301,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5587020252705384672}
   - component: {fileID: 9175290437870260424}
+  - component: {fileID: 3967086647669050552}
+  - component: {fileID: 2087354561287746910}
   m_Layer: 0
   m_Name: Controller Components
   m_TagString: Untagged
@@ -338,7 +340,40 @@ MonoBehaviour:
   rb: {fileID: 9160309061082762016}
   _animator: {fileID: 5357056738195235838}
   _runBoolName: Running
-  _groundSpeed: 30
+  _groundSpeed: 25
+--- !u!114 &3967086647669050552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788064633676672164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e23c6a60580b06141acd9ff2973c2b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  homing: 0
+  BoneSpur: {fileID: 6172740967761826166, guid: af748641641deb943b76dd3ad43127b6, type: 3}
+  spawnPoint: {fileID: 3470940447766416675}
+  speed: 20
+  projectilesToFire: 4
+--- !u!114 &2087354561287746910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788064633676672164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39dd4228af428a84f946a75b56630929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  growthRate: 0.1
+  NegativeWave: {fileID: 0}
+  spawnPoint: {fileID: 6778570039380386796}
 --- !u!1 &798019208313088730
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,9 +513,9 @@ ParentConstraint:
   m_TranslationAtRest: {x: -0.38600016, y: 0.58200014, z: 0.051}
   m_RotationAtRest: {x: 0, y: 0, z: -84.34244}
   m_TranslationOffsets:
-  - {x: -0.554863, y: -0.032227993, z: -0.0038354397}
+  - {x: -0.55486274, y: -0.032228947, z: -0.0038347244}
   m_RotationOffsets:
-  - {x: 0.37111658, y: 3.3455734, z: -90.665054}
+  - {x: 0.3711166, y: 3.345574, z: -90.665054}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -575,7 +610,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: -0.22299999, y: -0.975, z: 0.06999999}
   m_RotationAtRest: {x: 81.187485, y: -180, z: -180}
   m_TranslationOffsets:
-  - {x: -0.34058547, y: -0.14560843, z: -0.040699422}
+  - {x: -0.3405857, y: -0.14560854, z: -0.040699482}
   m_RotationOffsets:
   - {x: 86.34003, y: -97.15854, z: -10.085503}
   m_AffectTranslationX: 1
@@ -647,9 +682,9 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0, y: 0.84, z: 0.257}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -0.24017859, y: -0.5169295, z: 0}
+  - {x: -0.24017954, y: -0.5169296, z: 0}
   m_RotationOffsets:
-  - {x: 87.817085, y: -90, z: 0}
+  - {x: 87.81646, y: -90, z: 0}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -872,11 +907,11 @@ ParentConstraint:
   serializedVersion: 2
   m_Weight: 1
   m_TranslationAtRest: {x: 0, y: 0.378, z: -0.049}
-  m_RotationAtRest: {x: 0.8640214, y: 0, z: -90.00001}
+  m_RotationAtRest: {x: 0.86402154, y: 0, z: -90.00001}
   m_TranslationOffsets:
-  - {x: 0.04462862, y: 0.00946939, z: 0}
+  - {x: 0.044629335, y: 0.009469032, z: 0}
   m_RotationOffsets:
-  - {x: 74.29416, y: -90, z: -90.00001}
+  - {x: 74.29417, y: -90, z: -90.00001}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -971,7 +1006,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0.20600003, y: 0.564, z: 0.027999982}
   m_RotationAtRest: {x: 0, y: 176.71155, z: 6.687854}
   m_TranslationOffsets:
-  - {x: -0.34160423, y: -0.18511534, z: 0.11785132}
+  - {x: -0.34160423, y: -0.18511486, z: 0.11785126}
   m_RotationOffsets:
   - {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 1
@@ -1068,7 +1103,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0.18200126, y: -0.6290024, z: 0.025001556}
   m_RotationAtRest: {x: 2.9730563, y: 4.826001, z: 7.891147}
   m_TranslationOffsets:
-  - {x: -1.5268192, y: -0.11715245, z: -0.13467884}
+  - {x: -1.5268198, y: -0.117152214, z: -0.13467881}
   m_RotationOffsets:
   - {x: 84.87826, y: 160.24042, z: 77.80765}
   m_AffectTranslationX: 1
@@ -1165,9 +1200,9 @@ ParentConstraint:
   m_TranslationAtRest: {x: -0.09100002, y: -0.10100007, z: -0.01699987}
   m_RotationAtRest: {x: -11.490426, y: 2.8150954, z: -13.866698}
   m_TranslationOffsets:
-  - {x: -0.7640071, y: -0.075478554, z: 0.09377998}
+  - {x: -0.76400757, y: -0.07547808, z: 0.09378052}
   m_RotationOffsets:
-  - {x: -54.32657, y: -6.090983, z: -88.06422}
+  - {x: -54.326572, y: -6.090983, z: -88.06422}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -1262,7 +1297,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0, y: 0.824, z: 0.15200001}
   m_RotationAtRest: {x: -29.136105, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -0.16022348, y: -0.09967291, z: 0}
+  - {x: -0.16022253, y: -0.09967232, z: 0}
   m_RotationOffsets:
   - {x: 58.680424, y: -90, z: 0}
   m_AffectTranslationX: 1
@@ -1451,9 +1486,9 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0.091000035, y: -0.10100007, z: -0.016999826}
   m_RotationAtRest: {x: -11.490485, y: -2.8150742, z: 13.866659}
   m_TranslationOffsets:
-  - {x: -0.77302027, y: -0.01951015, z: 0.016037941}
+  - {x: -0.77302074, y: -0.019509315, z: 0.01603797}
   m_RotationOffsets:
-  - {x: -84.725975, y: -121.57272, z: 44.769737}
+  - {x: -84.7259, y: -121.57278, z: 44.769825}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -1546,7 +1581,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 1.11, y: 0.508, z: 0.8580003}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -3.2575183, y: 0.008057117, z: 0.013263702}
+  - {x: -3.2575188, y: 0.008057117, z: 0.013263226}
   m_RotationOffsets:
   - {x: 0, y: -90, z: 0}
   m_AffectTranslationX: 1
@@ -1646,7 +1681,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: -1.1081998, y: 0.5251998, z: 0.048000067}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -0.28336954, y: -0.112291336, z: 0.030487299}
+  - {x: -0.28337002, y: -0.112291336, z: 0.03048706}
   m_RotationOffsets:
   - {x: -0.9517958, y: 6.1288366, z: 8.793848}
   m_AffectTranslationX: 1
@@ -1743,9 +1778,9 @@ ParentConstraint:
   m_TranslationAtRest: {x: 1.1082, y: 0.5252, z: 0.048000038}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -0.2833705, y: -0.11229038, z: -0.030487299}
+  - {x: -0.28337002, y: -0.11229038, z: -0.03048706}
   m_RotationOffsets:
-  - {x: -0.9517958, y: 173.87117, z: -8.793847}
+  - {x: -0.95179576, y: 173.87117, z: -8.793848}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -1835,7 +1870,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aedba60a9e03be54bb4fcdd75755075c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
+  _maxHealth: 1000
+  _currHealth: 1000
+  mainHealthBarFill: {fileID: 0}
 --- !u!1 &6708489138469082620
 GameObject:
   m_ObjectHideFlags: 0
@@ -1934,6 +1971,8 @@ MonoBehaviour:
   rb: {fileID: 9160309061082762016}
   movement: {fileID: 9175290437870260424}
   _meleeWeapon: {fileID: 8601818318582050083}
+  _boneSpurs: {fileID: 3967086647669050552}
+  _negativeWave: {fileID: 2087354561287746910}
 --- !u!1 &8165706931530033032
 GameObject:
   m_ObjectHideFlags: 0
@@ -2004,7 +2043,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: -0.762, y: 0.544, z: 0.05399999}
   m_RotationAtRest: {x: 0, y: 0, z: 94.68715}
   m_TranslationOffsets:
-  - {x: -0.9220469, y: -0.0608716, z: 0.033339858}
+  - {x: -0.9220469, y: -0.060872078, z: 0.033340454}
   m_RotationOffsets:
   - {x: -0.037201308, y: -0.5869731, z: 91.0609}
   m_AffectTranslationX: 1
@@ -2101,7 +2140,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0, y: 0.24300003, z: -0.048000008}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -0.12059116, y: -0.03660074, z: 0}
+  - {x: -0.12059116, y: -0.036601067, z: 0}
   m_RotationOffsets:
   - {x: 84.62627, y: -89.99995, z: 0}
   m_AffectTranslationX: 1
@@ -2233,9 +2272,9 @@ ParentConstraint:
   m_TranslationAtRest: {x: -0.1820012, y: -0.6290024, z: 0.025001585}
   m_RotationAtRest: {x: 2.973035, y: -4.8260546, z: -7.8911676}
   m_TranslationOffsets:
-  - {x: -1.535907, y: -0.031899527, z: 0.054895103}
+  - {x: -1.5359075, y: -0.031899452, z: 0.054894447}
   m_RotationOffsets:
-  - {x: 23.106909, y: -0.7670942, z: -92.85781}
+  - {x: 23.106905, y: -0.76709247, z: -92.8578}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -2330,9 +2369,9 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0.38600016, y: 0.58200014, z: 0.051}
   m_RotationAtRest: {x: 0, y: 0, z: 84.34244}
   m_TranslationOffsets:
-  - {x: -0.55486315, y: -0.032227993, z: 0.0038352013}
+  - {x: -0.5548631, y: -0.03222847, z: 0.0038347244}
   m_RotationOffsets:
-  - {x: 0.37111998, y: 176.65443, z: 90.66506}
+  - {x: 0.37112, y: 176.65443, z: 90.665054}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -2427,11 +2466,11 @@ ParentConstraint:
   serializedVersion: 2
   m_Weight: 1
   m_TranslationAtRest: {x: 0, y: 0.536, z: -0.011}
-  m_RotationAtRest: {x: 0.86403567, y: 0, z: -90}
+  m_RotationAtRest: {x: 0.8640357, y: 0, z: -90}
   m_TranslationOffsets:
   - {x: 0.16832829, y: 0.033766747, z: 0}
   m_RotationOffsets:
-  - {x: 70.78085, y: -90, z: -90}
+  - {x: 70.78082, y: -90, z: -90}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -2675,6 +2714,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3469606455350326723, guid: b276d40c110edd148a0cb553a2ed4da0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c4afcabfc1be5c244ba95f13007c74d1, type: 2}
     - target: {fileID: 3506076204410180264, guid: b276d40c110edd148a0cb553a2ed4da0, type: 3}
       propertyPath: m_Name
       value: LichBossRerig
