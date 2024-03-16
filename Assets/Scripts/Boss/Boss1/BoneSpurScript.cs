@@ -5,7 +5,14 @@ using UnityEngine;
 public class BoneSpurScript : MonoBehaviour
 {
     [SerializeField] private LayerMask deletionLayers;
+    public float speed = 50f; // Speed of the projectile
     public int damageAmount = 10;
+
+    void Update()
+    {
+        // Move the projectile forward based on its local forward direction and speed
+        transform.position += transform.forward * speed * Time.deltaTime;
+    }
 
     void OnTriggerEnter(Collider other)
     {

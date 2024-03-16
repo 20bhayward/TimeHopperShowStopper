@@ -7,8 +7,8 @@ public class FireBoneSpur : MonoBehaviour
     [SerializeField] private bool homing;
     public GameObject BoneSpur;
     public Transform spawnPoint;
-    public float speed = 20;
-    public int projectilesToFire = 4; // Number of projectiles to fire at once
+    public float speed = 50;
+    public int projectilesToFire = 34; // Number of projectiles to fire at once
     private GameObject playerGameObject;
 
     void Start()
@@ -30,22 +30,20 @@ public class FireBoneSpur : MonoBehaviour
     {
         Debug.Log("Spawning and shooting projectiles");
 
+        StartCoroutine(SpawnProjectilesWithDelay(playerPos));
+    }
+
+    private IEnumerator SpawnProjectilesWithDelay(Vector3 playerPos)
+    {
         for (int i = 0; i < projectilesToFire; i++)
         {
+            Debug.Log("spawned " + i);
             Vector3 direction = (playerPos - spawnPoint.position).normalized;
             Quaternion rotation = Quaternion.LookRotation(direction);
 
             GameObject projectile = Instantiate(BoneSpur, spawnPoint.position, rotation);
-            StartCoroutine(FireProjectile(projectile, direction));
-        }
-    }
 
-    IEnumerator FireProjectile(GameObject projectile, Vector3 direction)
-    {
-        while (true)
-        {
-            projectile.transform.position += direction * speed * Time.deltaTime;
-            yield return null;
+            yield return new WaitForSeconds(.5f); // Wait for 1 second before spawning the next projectile
         }
     }
 }
