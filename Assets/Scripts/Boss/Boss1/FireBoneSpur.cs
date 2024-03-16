@@ -30,12 +30,9 @@ public class FireBoneSpur : MonoBehaviour
     {
         Debug.Log("Spawning and shooting projectiles");
 
-        for (int i = 0; i < projectilesToFire; i++)
-        {
-            Vector3 direction = (playerPos - spawnPoint.position).normalized;
-            Quaternion rotation = Quaternion.LookRotation(direction);
+        Vector3 direction = (playerPos - spawnPoint.position).normalized;
+        Quaternion rotation = Quaternion.LookRotation(direction);
 
-            GameObject projectile = Instantiate(BoneSpur, spawnPoint.position, rotation);
-        }
+        GameObject projectile = Instantiate(BoneSpur, spawnPoint.position, rotation);
     }
 }
