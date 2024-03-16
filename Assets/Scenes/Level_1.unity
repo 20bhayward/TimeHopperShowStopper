@@ -284,6 +284,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2335820468724306926, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.503
+      objectReference: {fileID: 0}
+    - target: {fileID: 2335820468724306926, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.582
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577420138491599212, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577420138491599212, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.245
+      objectReference: {fileID: 0}
     - target: {fileID: 2996873948176887050, guid: 07b8679378572394298b921b33650422, type: 3}
       propertyPath: fireRate
       value: 0.7
@@ -292,9 +308,33 @@ PrefabInstance:
       propertyPath: damageAmount
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3242433382122812502, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: -4973734387028869240, guid: f646898efc2987941b3aec6aa8d35ff2, type: 3}
+    - target: {fileID: 4342291586833694565, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.279
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342291586833694565, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.243
+      objectReference: {fileID: 0}
     - target: {fileID: 5483395349356975458, guid: 07b8679378572394298b921b33650422, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431675240643954817, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8782251018132666746, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.503
+      objectReference: {fileID: 0}
+    - target: {fileID: 8782251018132666746, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.582
       objectReference: {fileID: 0}
     - target: {fileID: 8878414125422238942, guid: 07b8679378572394298b921b33650422, type: 3}
       propertyPath: crosshairObjects.Array.size
