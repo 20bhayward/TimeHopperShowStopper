@@ -6,7 +6,7 @@ public abstract class ADelayedAnimationEventNode : FiniteAnimationNode
     protected bool eventTriggered;
 
     public ADelayedAnimationEventNode(string animationStateName, float eventDelay,
-        List<AConditionNode> conditions = null) : base(animationStateName, conditions)
+        List<AConditionNode> conditions = null, float cooldown = 0) : base(animationStateName, conditions, cooldown)
     {
         if (eventDelay < 0 || eventDelay > 1)
         {

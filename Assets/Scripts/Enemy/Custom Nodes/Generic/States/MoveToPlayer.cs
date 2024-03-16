@@ -6,6 +6,8 @@ public class MoveToPlayer : StateNode
 {
     private bool _movementFailed = false;
 
+    public MoveToPlayer(float cooldown = 0) : base(cooldown) { }
+
     public override void UpdateState()
     {
         Debug.Log("Currently moving to player");

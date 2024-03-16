@@ -1,8 +1,14 @@
-using System.Diagnostics;
+using Unity.VisualScripting;
 
 public class StateNode : ANode
 {
     private bool _active;
+    private float _cooldown;
+
+    public StateNode(float cooldown = 0) : base()
+    {
+        _cooldown = cooldown;
+    }
 
     public override void InitNode()
     {
@@ -13,14 +19,20 @@ public class StateNode : ANode
     {
         if (!_active)
         {
+            if (_cooldown > 0)
+            {
+                UnityEngine.Debug.Log("%% SETTING COOLDOWN");
+                enemyInfo.SetStateCooldown(this, _cooldown);
+            }
             SetupState();
-            if (!CanRun())
+            if (!enemyInfo.CanPerformState(this) || !CanRun())
             {
                 SetState(NodeState.FAILURE);
                 return;
             }
             _active = true;
             enemyInfo.SetCurrentStateName(GetType().Name);
+            enemyInfo.LogState(this);
             OnEnterState();
         }
         SetState(NodeState.RUNNING);

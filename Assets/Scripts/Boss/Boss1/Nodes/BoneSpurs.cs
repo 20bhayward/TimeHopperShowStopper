@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BoneSpurs : ADelayedAnimationEventNode
 {
-    public BoneSpurs(string animationStateName, float eventDelay, List<AConditionNode> conditions = null) : base(animationStateName, eventDelay, conditions)
+    public BoneSpurs(string animationStateName, float eventDelay, List<AConditionNode> conditions = null,
+        float cooldown = 0) : base(animationStateName, eventDelay, conditions, cooldown)
     {
     }
 
