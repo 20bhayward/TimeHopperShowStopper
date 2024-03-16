@@ -2,40 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NegativeWave : StateNode
+public class NegativeWave : ADelayedAnimationEventNode
 {
-    public override void UpdateState()
+    public NegativeWave(string animationStateName, float eventDelay, List<AConditionNode> conditions = null, float cooldown = 0) 
+        : base(animationStateName, eventDelay, conditions, cooldown)
     {
-        Debug.Log("Currently Firing Negative Wave");
-    }
 
-    public override bool FailConditionMet()
-    {
-        return false;
-    }
-
-    public override bool SuccessConditionMet()
-    {
-        return true;
     }
 
     public override void OnEnterState()
     {
-        Debug.Log("Firing Negative Wave");
+        base.OnEnterState();
+        enemyController.RotateTowardPos(playerInfo.GetPos());
     }
 
-    public override void OnExitState()
+    public override void PerformDelayedEvent()
     {
-        Debug.Log("Attack Finished");
-    }
-
-    public override void OnSuccess()
-    {
-        Debug.Log("Negative Wave fired Successfully");
-    }
-
-    public override void OnFailure()
-    {
-        Debug.Log("Something went wrong, I failed Negative Wave");
+        Boss1Controller bossController = (Boss1Controller)enemyController;
+        //bossController.FireNegativeWave(playerInfo.GetPos());
     }
 }

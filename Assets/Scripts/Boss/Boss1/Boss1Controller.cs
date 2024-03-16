@@ -6,6 +6,7 @@ public class Boss1Controller : EnemyController
 {
     [SerializeField] private EnemyMeleeWeapon _meleeWeapon;
     [SerializeField] private FireBoneSpur _boneSpurs;
+    [SerializeField] private NegativeWaveComponent _negativeWave;
 
     #region MELEE ATTACKS
     public void StartMeleeAttack(float damage)
@@ -23,6 +24,11 @@ public class Boss1Controller : EnemyController
     public void FireBoneSpurs(Vector3 playerPos)
     {
         _boneSpurs.SpawnAndShootProjectiles(playerPos);
+    }
+
+    public void FireNegativeWave(Vector3 playerPos)
+    {
+        _negativeWave.SpawnProjectile(playerPos);
     }
     #endregion
 }

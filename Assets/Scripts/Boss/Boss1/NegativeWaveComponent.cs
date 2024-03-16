@@ -22,7 +22,7 @@ public class NegativeWaveComponent : MonoBehaviour
 
     }
 
-    void SpawnProjectile(Vector3 playerPos)
+    public void SpawnProjectile(Vector3 playerPos)
     {
         Vector3 direction = (playerPos - spawnPoint.position).normalized;
 

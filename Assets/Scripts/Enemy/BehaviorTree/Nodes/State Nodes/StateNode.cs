@@ -21,7 +21,6 @@ public class StateNode : ANode
         {
             if (_cooldown > 0)
             {
-                UnityEngine.Debug.Log("%% SETTING COOLDOWN");
                 enemyInfo.SetStateCooldown(this, _cooldown);
             }
             SetupState();

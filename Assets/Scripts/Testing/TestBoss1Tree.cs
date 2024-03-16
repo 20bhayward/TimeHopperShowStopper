@@ -12,9 +12,16 @@ public class TestBoss1Tree : ABehaviorTree
             }),
             new StandardSelector(new List<ANode>()
             {
-                new BoneSpurs("BoneSpikes", 0.43f, new List<AConditionNode>{
-                    new PlayerOutOfRange(10)
-                }, 10),
+                new RandomSequence(new List<ANode>()
+                {
+                    new BoneSpurs("BoneSpikes", 0.43f, new List<AConditionNode>{
+                        new PlayerOutOfRange(10)
+                    }, 10),
+                    /*new NegativeWave("NegativeWave", 0.40f, new List<AConditionNode>
+                    {
+                        new PlayerOutOfRange(10)
+                    }, 6)*/
+                }),
                 new StandardSequence(new List<ANode>()
                 {
                     new PlayerOutOfRange(10),
