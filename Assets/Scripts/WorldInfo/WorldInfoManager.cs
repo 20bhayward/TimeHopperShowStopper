@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class WorldInfoManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] protected WorldController worldController;
 
-    // Update is called once per frame
-    void Update()
+    public TimeState GetTimeState()
     {
-        
+        return worldController.GetTimeState();
     }
 }

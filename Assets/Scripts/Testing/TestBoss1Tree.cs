@@ -12,11 +12,11 @@ public class TestBoss1Tree : ABehaviorTree
             }),
             new StandardSequence(new List<ANode>()
             {
-                //new BoneSpurs("Bone Spikes", 0.43f, new List<AConditionNode>{
-                //    new PlayerOutOfRange(10)
-                //})
-                new PlayerOutOfRange(10),
-                new MoveToPlayer()
+                new BoneSpurs("BoneSpikes", 0.43f, new List<AConditionNode>{
+                    new PlayerOutOfRange(10)
+                })
+                //new PlayerOutOfRange(10),
+                //new MoveToPlayer()
             })
         });
     }

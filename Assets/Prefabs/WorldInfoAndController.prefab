@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5355020200994444979}
   - component: {fileID: 564964512214829070}
+  - component: {fileID: 7828153256644509203}
   m_Layer: 0
-  m_Name: WorldInfoManager
+  m_Name: WorldInfoAndController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,3 +45,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01acd5ed23f6ce4fa51ef2732a3847b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldController: {fileID: 0}
+--- !u!114 &7828153256644509203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7753006906894717358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9881d901d8a5f68419557bb969246f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pastLevel: {fileID: 0}
+  presentLevel: {fileID: 0}
+  moveBetweenLevels:
+  - {fileID: 0}
+  - {fileID: 0}

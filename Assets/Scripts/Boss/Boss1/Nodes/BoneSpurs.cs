@@ -10,6 +10,7 @@ public class BoneSpurs : ADelayedAnimationEventNode
 
     public override void OnEnterState()
     {
+        base.OnEnterState();
         enemyController.RotateTowardPos(playerInfo.GetPos());
     }
 
