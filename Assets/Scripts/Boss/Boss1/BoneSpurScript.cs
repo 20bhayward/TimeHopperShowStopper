@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoneSpurScript : MonoBehaviour
 {
     [SerializeField] private LayerMask deletionLayers;
-    public float speed = 20f; // Speed of the projectile
+    public float speed = 50f; // Speed of the projectile
     public int damageAmount = 10;
 
     void Update()

@@ -122,7 +122,7 @@ MonoBehaviour:
   deletionLayers:
     serializedVersion: 2
     m_Bits: 264
-  speed: 20
+  speed: 50
   damageAmount: 10
 --- !u!54 &3789973987723055597
 Rigidbody:
