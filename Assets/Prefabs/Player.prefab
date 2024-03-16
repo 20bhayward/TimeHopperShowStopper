@@ -292,6 +292,9 @@ MonoBehaviour:
   weaponObjects:
   - {fileID: 6431675240643954817}
   - {fileID: 5483395349356975458}
+  crosshairObjects:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &1157899359244027731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1156,6 +1159,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5399176363122811295, guid: b8e0ce5f393d271418375a5de9247084, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5580229467260206840, guid: b8e0ce5f393d271418375a5de9247084, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -1563,8 +1570,12 @@ PrefabInstance:
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5453248079077035966, guid: cd785d14ae4189248af753e9d071bdf8, type: 3}
+      propertyPath: fireRate
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453248079077035966, guid: cd785d14ae4189248af753e9d071bdf8, type: 3}
       propertyPath: damageAmount
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5453248079077035966, guid: cd785d14ae4189248af753e9d071bdf8, type: 3}
       propertyPath: altFireRadius
