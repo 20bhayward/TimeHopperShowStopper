@@ -121,4 +121,4 @@ MonoBehaviour:
   damageAmount: 1
   deletionLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 264
