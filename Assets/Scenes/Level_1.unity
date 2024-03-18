@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1135623084}
-  m_IndirectSpecularColor: {r: 0.59697896, g: 0.15550864, b: 0.095264815, a: 1}
+  m_IndirectSpecularColor: {r: 0.5969789, g: 0.15550864, b: 0.09526504, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -237,6 +237,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1157899359244027731, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: health
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157899359244027731, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: maxHealth
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157899359244027731, guid: 07b8679378572394298b921b33650422, type: 3}
       propertyPath: mainHealthBarFill
       value: 
       objectReference: {fileID: 716197853}
@@ -305,8 +313,44 @@ PrefabInstance:
       value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2996873948176887050, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: playerRb
+      value: 
+      objectReference: {fileID: 938756513}
+    - target: {fileID: 2996873948176887050, guid: 07b8679378572394298b921b33650422, type: 3}
       propertyPath: damageAmount
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996873948176887050, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: grappleSpeed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996873948176887050, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: maxPullForce
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996873948176887050, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: grapplePullStrength
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996873948176887050, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: grapplingHookPrefab
+      value: 
+      objectReference: {fileID: 5829357420157146819, guid: 622e5841a2ecccc4fa610d1226ebe792, type: 3}
+    - target: {fileID: 2996873948176887050, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: pullForceMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996873948176887050, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: swingForceMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996873948176887050, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: minGrappleReachDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996873948176887050, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: whatIsGrappleable.m_Bits
+      value: 73
       objectReference: {fileID: 0}
     - target: {fileID: 3242433382122812502, guid: 07b8679378572394298b921b33650422, type: 3}
       propertyPath: m_Materials.Array.data[2]
@@ -326,6 +370,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6431675240643954817, guid: 07b8679378572394298b921b33650422, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674952343317363042, guid: 07b8679378572394298b921b33650422, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8782251018132666746, guid: 07b8679378572394298b921b33650422, type: 3}
@@ -1341,6 +1389,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _worldController: {fileID: 1385173118}
+--- !u!54 &938756513 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4733903013333423700, guid: 07b8679378572394298b921b33650422, type: 3}
+  m_PrefabInstance: {fileID: 450969986}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &990476923
 GameObject:
   m_ObjectHideFlags: 0
@@ -3350,7 +3403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 461372083744573976, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].x
-      value: 87.81646
+      value: 87.817085
       objectReference: {fileID: 0}
     - target: {fileID: 461372083744573976, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].x
@@ -3370,15 +3423,15 @@ PrefabInstance:
       objectReference: {fileID: 450969987}
     - target: {fileID: 2078379277440032285, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].x
-      value: -84.7259
+      value: -84.725975
       objectReference: {fileID: 0}
     - target: {fileID: 2078379277440032285, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].y
-      value: -121.57278
+      value: -121.57272
       objectReference: {fileID: 0}
     - target: {fileID: 2078379277440032285, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].z
-      value: 44.769825
+      value: 44.769737
       objectReference: {fileID: 0}
     - target: {fileID: 2078379277440032285, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].x
@@ -3430,11 +3483,11 @@ PrefabInstance:
       objectReference: {fileID: 990476925}
     - target: {fileID: 4267310137670368938, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].x
-      value: -0.0371996
+      value: -0.03719957
       objectReference: {fileID: 0}
     - target: {fileID: 4267310137670368938, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].z
-      value: -91.060905
+      value: -91.06091
       objectReference: {fileID: 0}
     - target: {fileID: 4267310137670368938, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].x
@@ -3450,11 +3503,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4926780635631739315, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].x
-      value: 0.37112
+      value: 0.37111998
       objectReference: {fileID: 0}
     - target: {fileID: 4926780635631739315, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].z
-      value: 90.665054
+      value: 90.66506
       objectReference: {fileID: 0}
     - target: {fileID: 4926780635631739315, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].x
@@ -3470,11 +3523,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5015080816501942840, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].x
-      value: 0.3711166
+      value: 0.37111658
       objectReference: {fileID: 0}
     - target: {fileID: 5015080816501942840, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].y
-      value: 3.345574
+      value: 3.3455734
       objectReference: {fileID: 0}
     - target: {fileID: 5015080816501942840, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].x
@@ -3490,15 +3543,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5021640441725230819, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].x
-      value: 23.106905
+      value: 23.106909
       objectReference: {fileID: 0}
     - target: {fileID: 5021640441725230819, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].y
-      value: -0.76709247
+      value: -0.7670942
       objectReference: {fileID: 0}
     - target: {fileID: 5021640441725230819, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].z
-      value: -92.8578
+      value: -92.85781
       objectReference: {fileID: 0}
     - target: {fileID: 5021640441725230819, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].x
@@ -3514,11 +3567,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5227172214789574028, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].x
-      value: -0.95179576
+      value: -0.9517958
       objectReference: {fileID: 0}
     - target: {fileID: 5227172214789574028, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].z
-      value: -8.793848
+      value: -8.793847
       objectReference: {fileID: 0}
     - target: {fileID: 5227172214789574028, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].x
@@ -3546,11 +3599,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5754331142916291125, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationAtRest.x
-      value: 0.86402154
+      value: 0.8640214
       objectReference: {fileID: 0}
     - target: {fileID: 5754331142916291125, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].x
-      value: 74.29417
+      value: 74.29416
       objectReference: {fileID: 0}
     - target: {fileID: 5754331142916291125, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].x
@@ -3594,11 +3647,11 @@ PrefabInstance:
       objectReference: {fileID: 990476925}
     - target: {fileID: 7787115004460201360, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationAtRest.x
-      value: 0.8640357
+      value: 0.86403567
       objectReference: {fileID: 0}
     - target: {fileID: 7787115004460201360, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].x
-      value: 70.78082
+      value: 70.78085
       objectReference: {fileID: 0}
     - target: {fileID: 7787115004460201360, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].x
@@ -3670,7 +3723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8369276373332971575, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_RotationOffsets.Array.data[0].x
-      value: -54.326572
+      value: -54.32657
       objectReference: {fileID: 0}
     - target: {fileID: 8369276373332971575, guid: aab207071961de44bb799aeecde59038, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].x

@@ -24,6 +24,14 @@ public class DualWieldPistols : AWeapon
     private Transform grappledTarget; // To keep track of the target's transform
     private Vector3 grappleOffset; // The offset from the target's origin to the grapple point
     public float grappleSpeed = 25f;  // Speed of the grappling hook projectile
+    private bool grappleShotInProgress = false;  // Flag to indicate a grapple shot is in progress
+    [Header("Grappling Physics")]
+    public Rigidbody playerRb;
+    public float swingForceMultiplier = 10f;
+    public float pullForceMultiplier = 0.1f;
+    public float grapplePullStrength = 10f;
+    public float grappleDuration = 5f;  // Time after which the grapple automatically disengages
+    public float minGrappleReachDistance = 1f;
 
 
     private AudioSource audioSource;
@@ -38,7 +46,12 @@ public class DualWieldPistols : AWeapon
         }
         audioSource.playOnAwake = false;
         lr = GetComponent<LineRenderer>();
+        if (lr != null)
+        {
+            lr.enabled = false;  // Ensure the line renderer is initially disabled
+        }
     }
+
 
     void Update()
     {
@@ -53,14 +66,18 @@ public class DualWieldPistols : AWeapon
 
         if (Input.GetButtonDown("Fire2"))
         {
+            lr.enabled = false;
             StartGrapple();
         }
+
 
         if (isGrappling)
         {
             UpdateGrappleLine();
+            ApplyGrapplePhysics();  
         }
     }
+
 
     public override void FireOnce()
     {
@@ -105,29 +122,85 @@ public class DualWieldPistols : AWeapon
             Destroy(muzzleFlashInstance, 0.3f); // Adjust as needed
         }
     }
+    private IEnumerator MoveGrappleHookTowardsTarget(Vector3 targetPoint)
+    {
+        if (!currentGrappleHook) yield break;
+
+        float startTime = Time.time;
+        Vector3 startPosition = currentGrappleHook.transform.position;
+        float journeyLength = Vector3.Distance(startPosition, targetPoint);
+        float fracComplete = 0;
+
+        while (fracComplete < 1 && currentGrappleHook)
+        {
+            float distCovered = (Time.time - startTime) * grappleSpeed;
+            fracComplete = distCovered / journeyLength;
+            currentGrappleHook.transform.position = Vector3.Lerp(startPosition, targetPoint, fracComplete);
+            yield return null;
+        }
+
+        if (currentGrappleHook)
+        {
+            SetGrapplePoint(targetPoint);
+            Destroy(currentGrappleHook); // Destroy the hook after it reaches the target
+        }
+    }
+
+    private void StopGrapple()
+    {
+        if (isGrappling)
+        {
+            isGrappling = false;
+            grappleShotInProgress = false;
+            if (lr != null)
+            {
+                lr.enabled = false;
+            }
+            if (currentGrappleHook)
+            {
+                Destroy(currentGrappleHook);
+            }
+
+            // Reset the player's velocity to stop movement immediately when grappling ends
+            Rigidbody playerRb = GetComponent<Rigidbody>();
+            if (playerRb != null)
+            {
+                playerRb.velocity = Vector3.zero;
+                playerRb.angularVelocity = Vector3.zero; // Reset angular velocity if there's any rotation applied
+            }
+        }
+    }
+
 
     private void StartGrapple()
     {
+        if (grappleShotInProgress) return;
+
         RaycastHit hit;
         if (Physics.Raycast(barrelTransforms[1].position, barrelTransforms[1].forward, out hit, maxGrappleDistance, whatIsGrappleable))
         {
+            grappleShotInProgress = true;
             isGrappling = true;
             grappledTarget = hit.transform;
-            grappleOffset = hit.point - grappledTarget.position;
-            currentGrappleHook = Instantiate(grapplingHookPrefab, barrelTransforms[1].position, Quaternion.identity);
+            grapplePoint = hit.point;
+            currentGrappleHook = Instantiate(grapplingHookPrefab, barrelTransforms[1].position, Quaternion.LookRotation(hit.point - barrelTransforms[1].position));
 
-            Rigidbody grappleRb = currentGrappleHook.GetComponent<Rigidbody>();
-            if (grappleRb != null)
-            {
-                Vector3 direction = (hit.point - barrelTransforms[1].position).normalized;
-                grappleRb.velocity = direction * grappleSpeed;
-            }
+            StartCoroutine(MoveGrappleHookTowardsTarget(hit.point));
+            StartCoroutine(GrappleDurationTimer(grappleDuration));
         }
+    }
+
+    private IEnumerator GrappleDurationTimer(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        StopGrapple();
     }
 
     public void SetGrapplePoint(Vector3 point)
     {
         grapplePoint = point;
+        isGrappling = true;
+
         if (lr != null)
         {
             lr.enabled = true;
@@ -135,33 +208,10 @@ public class DualWieldPistols : AWeapon
             lr.SetPosition(1, grapplePoint);
         }
 
-        // Handle the physics of tethering here, e.g., applying a force towards the grapple point
+        // Start applying physics forces
+        ApplyGrapplePhysics();
     }
 
-
-
-    private IEnumerator WaitForGrappleToReachTarget(Vector3 targetPoint)
-    {
-        // Wait until the grappling hook reaches the target
-        while (currentGrappleHook != null && Vector3.Distance(currentGrappleHook.transform.position, targetPoint) > 0.5f)
-        {
-            yield return null;
-        }
-
-        if (currentGrappleHook != null)
-        {
-            grapplePoint = targetPoint;
-            // Here you can also adjust the grapple hook's position to exactly match the target point
-
-            // Initialize the LineRenderer or grappling visual
-            if (lr != null)
-            {
-                lr.enabled = true;
-                lr.SetPosition(0, barrelTransforms[1].position);
-                lr.SetPosition(1, grapplePoint);
-            }
-        }
-    }
 
     private void UpdateGrappleLine()
     {
@@ -173,15 +223,46 @@ public class DualWieldPistols : AWeapon
             lr.SetPosition(1, grapplePoint);
         }
     }
-
-    private void StopGrapple()
+    private void ApplyGrapplePhysics()
     {
-        if (isGrappling)
+        if (!isGrappling || grappledTarget == null || playerRb == null) return;
+
+        Vector3 directionToGrapplePoint = grapplePoint - playerRb.transform.position;
+        float distanceToGrapplePoint = directionToGrapplePoint.magnitude;
+
+        if (distanceToGrapplePoint < minGrappleReachDistance)
         {
-            isGrappling = false;
-            lr.enabled = false;
-            Destroy(currentGrappleHook);
-            // Reset player movement and any grapple-related states
+            StopGrapple();
+            return;
+        }
+
+        // Get player input for swinging
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        // Calculate swing direction based on horizontal input only, to keep swinging in the horizontal plane
+        Vector3 swingDirection = transform.right * horizontalInput;
+
+        // Apply swing force based on player input, ensuring it's perpendicular to the direction to the grapple point
+        if (swingDirection.magnitude > 0.1f)
+        {
+            Vector3 perpendicularSwingDirection = Vector3.Cross(swingDirection, directionToGrapplePoint).normalized;
+            Vector3 swingForce = perpendicularSwingDirection * swingForceMultiplier;
+            playerRb.AddForce(swingForce);
+        }
+
+        // Apply a moderated pull force towards the grapple point, preventing excessive vertical movement
+        Vector3 pullForce = directionToGrapplePoint.normalized * grapplePullStrength * pullForceMultiplier;
+        if (verticalInput >= 0)  // Optionally, use vertical input to control the intensity of the pull
+        {
+            playerRb.AddForce(pullForce * verticalInput);
         }
     }
+
+
+
+
+
+
+
 }
