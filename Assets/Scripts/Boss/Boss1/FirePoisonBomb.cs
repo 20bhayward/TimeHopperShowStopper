@@ -27,12 +27,13 @@ public class FirePoisonBomb : MonoBehaviour
     public void SpawnAndShootProjectiles(Vector3 playerPos)
     {
         Debug.Log("Spawning and shooting projectiles");
+       // playerPos.y -= 4; //I want the bomb to aim at the players feet, so it hits the ground near them and explodes;
 
         for (int i = 0; i < projectilesToFire; i++)
         {
+
             Vector3 direction = (playerPos - spawnPoint.position).normalized;
             Quaternion rotation = Quaternion.LookRotation(direction);
-
             GameObject projectile = Instantiate(PoisonBomb, spawnPoint.position, rotation);
         }
     }
