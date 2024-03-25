@@ -26,7 +26,6 @@ public class CompoundDamageable : MonoBehaviour
         if (Time.fixedTime - _lastDamageTime >= _damageWindow)
         {
             _lastDamageTime = Time.fixedTime;
-            Debug.Log("Damage Taken: " + damage);
             _health.AdjustHealth(damage);
             
         }

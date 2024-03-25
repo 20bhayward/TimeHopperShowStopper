@@ -18,7 +18,7 @@ public class EnemyInfoManager : MonoBehaviour
         _stateTimeLog = new Dictionary<string, float>();
     }
 
-    public void SetStateCooldown(StateNode state, float cooldown)
+    public void SetStateCooldown(StateNode state, float cooldown, float delay = 0)
     {
         string stateName = state.GetType().Name;
         if (_stateCooldowns.ContainsKey(stateName))
@@ -26,6 +26,10 @@ public class EnemyInfoManager : MonoBehaviour
             return;
         }
         _stateCooldowns.Add(stateName, cooldown);
+        if (delay > 0)
+        {
+            _stateTimeLog.Add(stateName, delay - cooldown);
+        }
     }
     
     public void LogState(StateNode state)

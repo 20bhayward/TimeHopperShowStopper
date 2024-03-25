@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class NegativeWave : ADelayedAnimationEventNode
 {
-    public NegativeWave(string animationStateName, float eventDelay, List<AConditionNode> conditions = null, float cooldown = 0) 
-        : base(animationStateName, eventDelay, conditions, cooldown)
+    public NegativeWave(string animationStateName, float eventDelay, List<AConditionNode> conditions = null, float cooldown = 0, float delay = 0) 
+        : base(animationStateName, eventDelay, conditions, cooldown, delay)
     {
 
     }

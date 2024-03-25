@@ -4,10 +4,12 @@ public class StateNode : ANode
 {
     private bool _active;
     private float _cooldown;
+    private float _delay;
 
-    public StateNode(float cooldown = 0) : base()
+    public StateNode(float cooldown = 0, float delay = 0) : base()
     {
         _cooldown = cooldown;
+        _delay = delay;
     }
 
     public override void InitNode()
@@ -21,7 +23,7 @@ public class StateNode : ANode
         {
             if (_cooldown > 0)
             {
-                enemyInfo.SetStateCooldown(this, _cooldown);
+                enemyInfo.SetStateCooldown(this, _cooldown, _delay);
             }
             SetupState();
             if (!enemyInfo.CanPerformState(this) || !CanRun())

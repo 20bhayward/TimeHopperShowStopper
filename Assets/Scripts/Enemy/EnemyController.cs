@@ -97,6 +97,7 @@ public class EnemyController : MonoBehaviour
     public void PlayAnimationState(string animationStateName)
     {
         animator.Play(animationStateName);
+        animator.Update(0);
     }
 
     public void ReturnToIdleState()

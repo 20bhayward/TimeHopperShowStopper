@@ -6,7 +6,7 @@ public class FiniteAnimationNode : StateNode
     protected string animationStateName;
     protected List<AConditionNode> conditions;
 
-    public FiniteAnimationNode(string animationStateName, List<AConditionNode> conditions = null, float cooldown = 0) : base(cooldown)
+    public FiniteAnimationNode(string animationStateName, List<AConditionNode> conditions = null, float cooldown = 0, float delay = 0) : base(cooldown, delay)
     {
         this.animationStateName = animationStateName;
         if (conditions == null)
