@@ -41,9 +41,9 @@ public class FireBoneSpur : MonoBehaviour
             Debug.Log("spawned " + i);
 
             Vector3 shotgunPosition = playerPos;
-            float randomX = Random.Range(1f, 3f);
+            float randomX = Random.Range(-3f, 3f);
             float randomY = Random.Range(-2f, 2f);
-            float randomZ = Random.Range(1f, 3f);
+            float randomZ = Random.Range(-3f, 3f);
 
             shotgunPosition.x += randomX;
             shotgunPosition.y += randomY;
