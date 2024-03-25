@@ -20,4 +20,9 @@ public class BoneSpurs : ADelayedAnimationEventNode
         Boss1Controller bossController = (Boss1Controller)enemyController;
         bossController.FireBoneSpurs(playerInfo.GetPos());
     }
+
+    public override void OnSuccess()
+    {
+        base.OnSuccess();
+    }
 }

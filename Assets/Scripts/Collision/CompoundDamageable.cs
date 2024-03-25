@@ -8,6 +8,7 @@ public class CompoundDamageable : MonoBehaviour
     [SerializeField] private EnemyHealth _health;
     [SerializeField] private float _damageWindow = 0.01f;
     private float _lastDamageTime;
+    private bool _invulnerable = false;
 
 
     private void Start()
@@ -18,6 +19,10 @@ public class CompoundDamageable : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (_invulnerable)
+        {
+            return;
+        }
         if (Time.fixedTime - _lastDamageTime >= _damageWindow)
         {
             _lastDamageTime = Time.fixedTime;
@@ -27,5 +32,8 @@ public class CompoundDamageable : MonoBehaviour
         }
     }
 
-
+    public void SetInvulnerability(bool invulnerable)
+    {
+        _invulnerable = invulnerable;
+    }
 }

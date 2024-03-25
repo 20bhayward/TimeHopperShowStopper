@@ -23,6 +23,7 @@ public abstract class ADelayedAnimationEventNode : FiniteAnimationNode
 
     public override void UpdateState()
     {
+        UnityEngine.Debug.Log("####" + enemyController.GetCurrentAnimationStateProgress());
         if (enemyController.GetCurrentAnimationStateProgress() >= eventDelay && !eventTriggered)
         {
             eventTriggered = true;

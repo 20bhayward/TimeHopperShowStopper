@@ -38,7 +38,6 @@ public class FiniteAnimationNode : StateNode
 
     public override bool FailConditionMet()
     {
-
         return SuccessConditionMet() && !AllConditionsPass();
     }
 
