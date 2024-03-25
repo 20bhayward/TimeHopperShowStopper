@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   homing: 0
-  BoneSpur: {fileID: 6172740967761826166, guid: af748641641deb943b76dd3ad43127b6, type: 3}
+  BoneSpur: {fileID: 4196158336065659850, guid: 16ccee97d61de95438761c404ce6f26c, type: 3}
   spawnPoint: {fileID: 7117652153138015213}
-  speed: 4
+  speed: 8
   projectilesToFire: 5
+  fireDelay: 0.1

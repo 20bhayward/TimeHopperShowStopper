@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DualWieldPistols : AWeapon
 {
@@ -25,6 +26,10 @@ public class DualWieldPistols : AWeapon
     private Vector3 grappleOffset; // The offset from the target's origin to the grapple point
     public float grappleSpeed = 25f;  // Speed of the grappling hook projectile
     private bool grappleShotInProgress = false;  // Flag to indicate a grapple shot is in progress
+    public float grappleCooldown = 5f;
+    private float grappleCooldownTimer = 0f;
+    public Image grappleCooldownUI;  // Assign this in the inspector
+
     [Header("Grappling Physics")]
     public Rigidbody playerRb;
     public float swingForceMultiplier = 10f;
@@ -55,6 +60,13 @@ public class DualWieldPistols : AWeapon
 
     void Update()
     {
+        // Handle cooldown timer
+        if (grappleCooldownTimer > 0)
+        {
+            grappleCooldownTimer -= Time.deltaTime;
+            UpdateGrappleCooldownUI();
+        }
+
         if (Input.GetButtonDown("Fire1") && !isGrappling)
         {
             StartAttack();
@@ -64,20 +76,27 @@ public class DualWieldPistols : AWeapon
             StopAttack();
         }
 
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && grappleCooldownTimer <= 0)
         {
+            StopGrapple();
             lr.enabled = false;
             StartGrapple();
+            grappleCooldownTimer = grappleCooldown;  // Reset the cooldown timer
         }
-
 
         if (isGrappling)
         {
             UpdateGrappleLine();
-            ApplyGrapplePhysics();  
+            ApplyGrapplePhysics();
         }
     }
-
+    private void UpdateGrappleCooldownUI()
+    {
+        if (grappleCooldownUI != null)
+        {
+            grappleCooldownUI.fillAmount = 1 - (grappleCooldownTimer / grappleCooldown);
+        }
+    }
 
     public override void FireOnce()
     {
@@ -145,31 +164,28 @@ public class DualWieldPistols : AWeapon
             Destroy(currentGrappleHook); // Destroy the hook after it reaches the target
         }
     }
-
     private void StopGrapple()
     {
-        if (isGrappling)
+        isGrappling = false;
+        grappleShotInProgress = false;
+        if (lr != null)
         {
-            isGrappling = false;
-            grappleShotInProgress = false;
-            if (lr != null)
-            {
-                lr.enabled = false;
-            }
-            if (currentGrappleHook)
-            {
-                Destroy(currentGrappleHook);
-            }
+            lr.enabled = false;
+        }
+        if (currentGrappleHook)
+        {
+            Destroy(currentGrappleHook);
+        }
 
-            // Reset the player's velocity to stop movement immediately when grappling ends
-            Rigidbody playerRb = GetComponent<Rigidbody>();
-            if (playerRb != null)
-            {
-                playerRb.velocity = Vector3.zero;
-                playerRb.angularVelocity = Vector3.zero; // Reset angular velocity if there's any rotation applied
-            }
+        // Reset physics
+        if (playerRb != null)
+        {
+            playerRb.velocity = Vector3.zero;
+            playerRb.angularVelocity = Vector3.zero;
         }
     }
+
+
 
 
     private void StartGrapple()
@@ -182,13 +198,15 @@ public class DualWieldPistols : AWeapon
             grappleShotInProgress = true;
             isGrappling = true;
             grappledTarget = hit.transform;
-            grapplePoint = hit.point;
+            grapplePoint = hit.point;  // Use the hit point directly for the grapple point
+            grappleOffset = hit.point - grappledTarget.position;
             currentGrappleHook = Instantiate(grapplingHookPrefab, barrelTransforms[1].position, Quaternion.LookRotation(hit.point - barrelTransforms[1].position));
 
-            StartCoroutine(MoveGrappleHookTowardsTarget(hit.point));
+            StartCoroutine(MoveGrappleHookTowardsTarget(grapplePoint));  // Move towards the exact hit point
             StartCoroutine(GrappleDurationTimer(grappleDuration));
         }
     }
+
 
     private IEnumerator GrappleDurationTimer(float duration)
     {
@@ -236,33 +254,29 @@ public class DualWieldPistols : AWeapon
             return;
         }
 
-        // Get player input for swinging
+        // Calculate player input for swinging
         float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
 
-        // Calculate swing direction based on horizontal input only, to keep swinging in the horizontal plane
-        Vector3 swingDirection = transform.right * horizontalInput;
-
-        // Apply swing force based on player input, ensuring it's perpendicular to the direction to the grapple point
-        if (swingDirection.magnitude > 0.1f)
+        // Apply swing force based on player input
+        if (Mathf.Abs(horizontalInput) > 0.1f)
         {
-            Vector3 perpendicularSwingDirection = Vector3.Cross(swingDirection, directionToGrapplePoint).normalized;
-            Vector3 swingForce = perpendicularSwingDirection * swingForceMultiplier;
-            playerRb.AddForce(swingForce);
+            Vector3 swingForce = playerRb.transform.right * horizontalInput * swingForceMultiplier;
+            playerRb.AddForceAtPosition(swingForce, grapplePoint);
         }
 
-        // Apply a moderated pull force towards the grapple point, preventing excessive vertical movement
+        // Apply pull force towards the grapple point
         Vector3 pullForce = directionToGrapplePoint.normalized * grapplePullStrength * pullForceMultiplier;
-        if (verticalInput >= 0)  // Optionally, use vertical input to control the intensity of the pull
-        {
-            playerRb.AddForce(pullForce * verticalInput);
-        }
+        playerRb.AddForce(pullForce);
     }
 
+    private void OnDisable()
+    {
+        StopGrapple();
+        grappleCooldownUI.enabled = false;
+    }
 
-
-
-
-
-
+    private void OnEnable()
+    {
+        grappleCooldownUI.enabled = true;
+    }
 }
