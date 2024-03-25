@@ -272,7 +272,10 @@ public class DualWieldPistols : AWeapon
     private void OnDisable()
     {
         StopGrapple();
-        grappleCooldownUI.enabled = false;
+        if (grappleCooldownUI != null)
+        {
+            grappleCooldownUI.enabled = false;
+        }
     }
 
     private void OnEnable()
