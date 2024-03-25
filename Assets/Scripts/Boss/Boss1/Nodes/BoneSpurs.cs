@@ -17,10 +17,6 @@ public class BoneSpurs : ADelayedAnimationEventNode
 
     public override void PerformDelayedEvent()
     {
-        if (enemyController.GetCurrentAnimationStateProgress() > 1)
-        {
-            Debug.DebugBreak();
-        }
         Boss1Controller bossController = (Boss1Controller)enemyController;
         bossController.FireBoneSpurs(playerInfo.GetPos());
     }
