@@ -55,7 +55,7 @@ public class EnemyInfoManager : MonoBehaviour
             {
                 float lastLoggedTime = _stateTimeLog[stateName];
                 float cooldown = _stateCooldowns[stateName];
-                Debug.Log("%% TIME SINCE LAST: " + (Time.time - lastLoggedTime));
+                //Debug.Log("%% TIME SINCE LAST: " + (Time.time - lastLoggedTime));
                 return Time.time > lastLoggedTime + cooldown;
             }
         }

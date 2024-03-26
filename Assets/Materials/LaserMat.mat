@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: LaserMat
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_Parent: {fileID: 2100000, guid: fc9fcf586183f854baea1f2a9dc2d9b0, type: 2}
+  m_Parent: {fileID: 2100000, guid: d9fc8f1d6f3b03449b9cd674614b0840, type: 2}
   m_ModifiedSerializedProperties: 18
   m_ValidKeywords:
   - _ALPHAPREMULTIPLY_ON
